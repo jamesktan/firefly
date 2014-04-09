@@ -4,7 +4,12 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-JBChartView.xcscheme</key>
+		<key>Pods-CorePlot.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +22,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14D4C65A8A07424480E485C7</key>
+		<key>35D7C44BC1F948138E71FAE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>281E8E3EE0604FAC84AED79A</key>
+		<key>DF2C000A2970408C8329391D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F88F4665F3CA43F3A98E5A8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>

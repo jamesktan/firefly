@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="Lht-lz-oZH">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Splash-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="FLYViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" userLabel="Splash" customClass="FLYViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,62 +15,120 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tV9-SS-i3e">
-                                <rect key="frame" x="131" y="82" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Scan">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="scanDevices:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="i9N-e9-QGE"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDk-mO-Jg4">
-                                <rect key="frame" x="31" y="43" width="259" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dJE-Yy-8uC">
-                                <rect key="frame" x="111" y="161" width="99" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Connect">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="connectPeripheral:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="dzt-4F-67l"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OS2-Ln-mTH">
-                                <rect key="frame" x="31" y="212" width="259" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VCS-1d-C7n">
-                                <rect key="frame" x="112" y="294" width="97" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Disconnect">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="disconnectPeripheral:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="0Ue-7z-s5v"/>
-                                </connections>
-                            </button>
-                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="7Dc-yu-wmo"/>
                     <connections>
-                        <outlet property="connectButton" destination="dJE-Yy-8uC" id="eIi-u1-Qdj"/>
-                        <outlet property="deviceID" destination="OS2-Ln-mTH" id="3xL-R7-7Fs"/>
-                        <outlet property="deviceName" destination="QDk-mO-Jg4" id="Cms-tB-WGI"/>
-                        <outlet property="disconnectButton" destination="VCS-1d-C7n" id="tLk-Tl-TvD"/>
+                        <segue destination="Ucy-71-ZDK" kind="push" identifier="pushNew" id="18j-w9-UbF"/>
+                        <segue destination="PXR-3T-2Pv" kind="push" identifier="pushOpen" id="QYb-ew-sls"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="544" y="-63"/>
+        </scene>
+        <!--Connect-->
+        <scene sceneID="soj-08-Kgk">
+            <objects>
+                <viewController id="Ucy-71-ZDK" userLabel="Connect" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iDP-Qp-ALj"/>
+                        <viewControllerLayoutGuide type="bottom" id="FDw-dx-3gD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7x9-Qo-UkU">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="3bD-tl-YjW"/>
+                    <connections>
+                        <segue destination="jPR-FJ-9cr" kind="push" identifier="push_monitor" id="Qih-sc-aDd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bRg-75-nEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899" y="-63"/>
+        </scene>
+        <!--Open-->
+        <scene sceneID="RQH-zU-mX3">
+            <objects>
+                <viewController id="PXR-3T-2Pv" userLabel="Open" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Nd-IB-AS6"/>
+                        <viewControllerLayoutGuide type="bottom" id="dSt-0M-ZHf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mer-dW-BMg">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Aa3-O6-vJ4"/>
+                    <connections>
+                        <segue destination="jPR-FJ-9cr" kind="push" identifier="push_monitor_existing" id="Bfr-jv-dZl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vJe-W8-Oef" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899" y="628"/>
+        </scene>
+        <!--Monitor-->
+        <scene sceneID="1YR-vx-qjh">
+            <objects>
+                <viewController id="jPR-FJ-9cr" userLabel="Monitor" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ue5-F2-gce"/>
+                        <viewControllerLayoutGuide type="bottom" id="ZTT-V7-VZV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="BVy-DZ-ALh">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="bvq-Bu-cbd"/>
+                    <connections>
+                        <segue destination="auY-x5-jO4" kind="push" identifier="push_save" id="xgM-Jk-s1z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9Vv-e0-cJ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1257" y="-63"/>
+        </scene>
+        <!--Save-->
+        <scene sceneID="wjq-nf-8jc">
+            <objects>
+                <viewController id="auY-x5-jO4" userLabel="Save" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="c5q-Qd-pz5"/>
+                        <viewControllerLayoutGuide type="bottom" id="WHo-ab-qXz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gR5-HP-c4C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Yuc-lw-j4Q"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W4J-b7-4y0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1613" y="-63"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="p2j-lz-AhH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Lht-lz-oZH" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vgv-wr-Dac">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="xNr-DZ-Dl4"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2cd-uV-0lS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="168" y="-63"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
@@ -78,4 +136,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="Bfr-jv-dZl"/>
+    </inferredMetricsTieBreakers>
 </document>

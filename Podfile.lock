@@ -1,10 +1,13 @@
 PODS:
-  - JBChartView (2.0.1)
+  - CorePlot (1.5.1)
+  - MBProgressHUD (0.8)
 
 DEPENDENCIES:
-  - JBChartView
+  - CorePlot (~> 1.4)
+  - MBProgressHUD (~> 0.5)
 
 SPEC CHECKSUMS:
-  JBChartView: 45a942ed229a7fe03f7de204cb2e3573ed55f27f
+  CorePlot: 7b55ddfce42eb93051c0f9edba927fd246831f6d
+  MBProgressHUD: 2bbc6f470111daf7f3eaa4eb12b8cbf01c4c0622
 
 COCOAPODS: 0.29.0
