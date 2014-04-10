@@ -7,12 +7,15 @@
 //
 
 #import "FLYAppDelegate.h"
-
+#import "FLYCaseManager.h"
+#import "FLYConnectionManager.h"
 @implementation FLYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    // Start the Managers
+    [[FLYCaseManager sharedInstance] setupNotifications] ;
+    [[FLYConnectionManager sharedInstance] setupNotifications];
     return YES;
 }
 							

@@ -7,7 +7,7 @@
         <!--Splash-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" userLabel="Splash" customClass="FLYViewController" sceneMemberID="viewController">
+                <viewController id="vXZ-lx-hvc" userLabel="Splash" customClass="FLYSplashViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jyV-Pf-zRb"/>
                         <viewControllerLayoutGuide type="bottom" id="2fi-mo-0CV"/>
@@ -15,10 +15,46 @@
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="firefly" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k7Q-QG-FS7">
+                                <rect key="frame" x="20" y="20" width="180" height="94"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="45"/>
+                                <color key="textColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gcX-3w-p1G">
+                                <rect key="frame" x="20" y="122" width="180" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
+                                <state key="normal" title=" start new run">
+                                    <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startNewCase:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="OHn-lT-4xa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LCS-Gg-SYW">
+                                <rect key="frame" x="20" y="180" width="180" height="50"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
+                                <state key="normal" title=" open existing run">
+                                    <color key="titleColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="openExistingCase:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="a1x-lO-TEd"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="7Dc-yu-wmo"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="caseExistingButton" destination="LCS-Gg-SYW" id="YzH-Ub-Ln7"/>
+                        <outlet property="caseNewButton" destination="gcX-3w-p1G" id="Sgs-Tg-Zy7"/>
                         <segue destination="Ucy-71-ZDK" kind="push" identifier="pushNew" id="18j-w9-UbF"/>
                         <segue destination="PXR-3T-2Pv" kind="push" identifier="pushOpen" id="QYb-ew-sls"/>
                     </connections>
@@ -30,7 +66,7 @@
         <!--Connect-->
         <scene sceneID="soj-08-Kgk">
             <objects>
-                <viewController id="Ucy-71-ZDK" userLabel="Connect" sceneMemberID="viewController">
+                <viewController id="Ucy-71-ZDK" userLabel="Connect" customClass="FLYConnectViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iDP-Qp-ALj"/>
                         <viewControllerLayoutGuide type="bottom" id="FDw-dx-3gD"/>
@@ -38,16 +74,59 @@
                     <view key="view" contentMode="scaleToFill" id="7x9-Qo-UkU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DS2-nP-e2o">
+                                <rect key="frame" x="20" y="36" width="70" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="arrow-big-01.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="Ucy-71-ZDK" eventType="touchUpInside" id="Crg-hW-uwq"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTV-ap-nA3">
+                                <rect key="frame" x="270" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="arrow-big-02.png">
+                                    <color key="titleColor" red="1" green="0.50196081399917603" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goChart:" destination="Ucy-71-ZDK" eventType="touchUpInside" id="li6-Lt-SFl"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ovQ-Vk-1RF">
+                                <rect key="frame" x="20" y="74" width="280" height="474"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SxC-Kg-CDU">
+                                <rect key="frame" x="107" y="36" width="107" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
+                                <state key="normal" title="scanning">
+                                    <color key="titleColor" red="0.20000000298023224" green="0.20000000298023224" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="scanDevices:" destination="Ucy-71-ZDK" eventType="touchUpInside" id="neH-CC-PP3"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="3bD-tl-YjW"/>
                     <connections>
+                        <outlet property="backButton" destination="DS2-nP-e2o" id="D26-jb-NkI"/>
+                        <outlet property="continueButton" destination="jTV-ap-nA3" id="9Bo-bv-JCr"/>
+                        <outlet property="scanButton" destination="SxC-Kg-CDU" id="iSd-tc-bbC"/>
                         <segue destination="jPR-FJ-9cr" kind="push" identifier="push_monitor" id="Qih-sc-aDd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bRg-75-nEB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="899" y="-63"/>
+            <point key="canvasLocation" x="965" y="-181"/>
         </scene>
         <!--Open-->
         <scene sceneID="RQH-zU-mX3">
@@ -69,12 +148,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vJe-W8-Oef" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="899" y="628"/>
+            <point key="canvasLocation" x="965" y="628"/>
         </scene>
         <!--Monitor-->
         <scene sceneID="1YR-vx-qjh">
             <objects>
-                <viewController id="jPR-FJ-9cr" userLabel="Monitor" sceneMemberID="viewController">
+                <viewController id="jPR-FJ-9cr" userLabel="Monitor" customClass="FLYChartViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="ue5-F2-gce"/>
                         <viewControllerLayoutGuide type="bottom" id="ZTT-V7-VZV"/>
@@ -82,16 +161,105 @@
                     <view key="view" contentMode="scaleToFill" id="BVy-DZ-ALh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SM7-AW-9kM">
+                                <rect key="frame" x="69" y="517" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button-record.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="startChart:" destination="jPR-FJ-9cr" eventType="touchUpInside" id="U36-DG-XYv"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NIK-Ij-g1d">
+                                <rect key="frame" x="107" y="518" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="button-pause.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="stopChart:" destination="jPR-FJ-9cr" eventType="touchUpInside" id="RX3-8B-Z4g"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5n-Sk-vbm">
+                                <rect key="frame" x="20" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="arrow-big-01.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goBack:" destination="jPR-FJ-9cr" eventType="touchUpInside" id="2gG-g5-7Dm"/>
+                                    <action selector="goBack:" destination="Ucy-71-ZDK" eventType="touchUpInside" id="Hih-Jm-L1C"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2hL-nK-nZ6">
+                                <rect key="frame" x="270" y="36" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="folder.png">
+                                    <color key="titleColor" red="1" green="0.50196081400000003" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="goChart:" destination="Ucy-71-ZDK" eventType="touchUpInside" id="HzS-P8-6bT"/>
+                                    <action selector="goSave:" destination="jPR-FJ-9cr" eventType="touchUpInside" id="wi0-IW-fO6"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsY-4D-YwR">
+                                <rect key="frame" x="183" y="518" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="bookmark.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="markChart:" destination="jPR-FJ-9cr" eventType="touchUpInside" id="zmJ-kV-Wlg"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Km-yg-O9G">
+                                <rect key="frame" x="145" y="518" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="recycle-bin.png">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="resetChart:" destination="jPR-FJ-9cr" eventType="touchUpInside" id="ELy-es-klw"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" placeholder="1" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u2I-pk-tef">
+                                <rect key="frame" x="221" y="517" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="monitor" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yiq-ez-i2a">
+                                <rect key="frame" x="118" y="41" width="84" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
+                                <color key="highlightedColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </label>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Bc-Oe-RfB" customClass="CPTGraphHostingView">
+                                <rect key="frame" x="20" y="70" width="280" height="439"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bvq-Bu-cbd"/>
                     <connections>
+                        <outlet property="backButton" destination="x5n-Sk-vbm" id="isP-U5-vF9"/>
+                        <outlet property="markButton" destination="vsY-4D-YwR" id="lzI-rG-Src"/>
+                        <outlet property="resetButton" destination="7Km-yg-O9G" id="dQj-dr-o0Z"/>
+                        <outlet property="saveButton" destination="2hL-nK-nZ6" id="lE0-eW-7xO"/>
+                        <outlet property="startButton" destination="SM7-AW-9kM" id="cRc-MS-dya"/>
+                        <outlet property="statusField" destination="u2I-pk-tef" id="WDP-uy-RNL"/>
+                        <outlet property="stopButton" destination="NIK-Ij-g1d" id="3PJ-LS-6bo"/>
                         <segue destination="auY-x5-jO4" kind="push" identifier="push_save" id="xgM-Jk-s1z"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Vv-e0-cJ3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1257" y="-63"/>
+            <point key="canvasLocation" x="1401" y="41"/>
         </scene>
         <!--Save-->
         <scene sceneID="wjq-nf-8jc">
@@ -110,7 +278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W4J-b7-4y0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1613" y="-63"/>
+            <point key="canvasLocation" x="1879" y="-235"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="p2j-lz-AhH">
@@ -131,12 +299,21 @@
             <point key="canvasLocation" x="168" y="-63"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="arrow-big-01.png" width="30" height="30"/>
+        <image name="arrow-big-02.png" width="30" height="30"/>
+        <image name="bookmark.png" width="30" height="30"/>
+        <image name="button-pause.png" width="30" height="30"/>
+        <image name="button-record.png" width="30" height="30"/>
+        <image name="folder.png" width="30" height="30"/>
+        <image name="recycle-bin.png" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Bfr-jv-dZl"/>
+        <segue reference="Qih-sc-aDd"/>
     </inferredMetricsTieBreakers>
 </document>

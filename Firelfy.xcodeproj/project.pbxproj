@@ -24,6 +24,18 @@
 		54DED4BC18E4A31C005FACC0 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DED49E18E4A31C005FACC0 /* UIKit.framework */; };
 		54DED4C418E4A31C005FACC0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 54DED4C218E4A31C005FACC0 /* InfoPlist.strings */; };
 		54DED4C618E4A31C005FACC0 /* FirelfyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 54DED4C518E4A31C005FACC0 /* FirelfyTests.m */; };
+		54F4D5F318F5E29B009BAC58 /* FLYSplashViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F4D5F218F5E29B009BAC58 /* FLYSplashViewController.m */; };
+		54F4D5F618F5E701009BAC58 /* FLYConnectionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F4D5F518F5E701009BAC58 /* FLYConnectionManager.m */; };
+		54F4D5F918F5E718009BAC58 /* FLYCaseManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F4D5F818F5E718009BAC58 /* FLYCaseManager.m */; };
+		54F4D5FD18F7325B009BAC58 /* FLYConnectViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F4D5FC18F7325B009BAC58 /* FLYConnectViewController.m */; };
+		54F4D60018F73778009BAC58 /* FLYChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54F4D5FF18F73778009BAC58 /* FLYChartViewController.m */; };
+		54F4D60F18F73A73009BAC58 /* button-record.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D60E18F73A73009BAC58 /* button-record.png */; };
+		54F4D61118F73A9C009BAC58 /* button-pause.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D61018F73A9C009BAC58 /* button-pause.png */; };
+		54F4D61318F73ADC009BAC58 /* bookmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D61218F73ADC009BAC58 /* bookmark.png */; };
+		54F4D61518F73B1D009BAC58 /* recycle-bin.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D61418F73B1D009BAC58 /* recycle-bin.png */; };
+		54F4D61718F73BA6009BAC58 /* arrow-big-01.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D61618F73BA6009BAC58 /* arrow-big-01.png */; };
+		54F4D61918F73BCD009BAC58 /* arrow-big-02.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D61818F73BCD009BAC58 /* arrow-big-02.png */; };
+		54F4D61B18F73C14009BAC58 /* folder.png in Resources */ = {isa = PBXBuildFile; fileRef = 54F4D61A18F73C14009BAC58 /* folder.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +73,23 @@
 		54DED4C118E4A31C005FACC0 /* FirelfyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FirelfyTests-Info.plist"; sourceTree = "<group>"; };
 		54DED4C318E4A31C005FACC0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		54DED4C518E4A31C005FACC0 /* FirelfyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirelfyTests.m; sourceTree = "<group>"; };
+		54F4D5F118F5E29B009BAC58 /* FLYSplashViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLYSplashViewController.h; path = VIewControllers/FLYSplashViewController.h; sourceTree = "<group>"; };
+		54F4D5F218F5E29B009BAC58 /* FLYSplashViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLYSplashViewController.m; path = VIewControllers/FLYSplashViewController.m; sourceTree = "<group>"; };
+		54F4D5F418F5E701009BAC58 /* FLYConnectionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLYConnectionManager.h; path = Objects/FLYConnectionManager.h; sourceTree = "<group>"; };
+		54F4D5F518F5E701009BAC58 /* FLYConnectionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLYConnectionManager.m; path = Objects/FLYConnectionManager.m; sourceTree = "<group>"; };
+		54F4D5F718F5E718009BAC58 /* FLYCaseManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLYCaseManager.h; path = Objects/FLYCaseManager.h; sourceTree = "<group>"; };
+		54F4D5F818F5E718009BAC58 /* FLYCaseManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLYCaseManager.m; path = Objects/FLYCaseManager.m; sourceTree = "<group>"; };
+		54F4D5FB18F7325B009BAC58 /* FLYConnectViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYConnectViewController.h; sourceTree = "<group>"; };
+		54F4D5FC18F7325B009BAC58 /* FLYConnectViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYConnectViewController.m; sourceTree = "<group>"; };
+		54F4D5FE18F73778009BAC58 /* FLYChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLYChartViewController.h; path = VIewControllers/FLYChartViewController.h; sourceTree = "<group>"; };
+		54F4D5FF18F73778009BAC58 /* FLYChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLYChartViewController.m; path = VIewControllers/FLYChartViewController.m; sourceTree = "<group>"; };
+		54F4D60E18F73A73009BAC58 /* button-record.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-record.png"; sourceTree = "<group>"; };
+		54F4D61018F73A9C009BAC58 /* button-pause.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pause.png"; sourceTree = "<group>"; };
+		54F4D61218F73ADC009BAC58 /* bookmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bookmark.png; sourceTree = "<group>"; };
+		54F4D61418F73B1D009BAC58 /* recycle-bin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "recycle-bin.png"; sourceTree = "<group>"; };
+		54F4D61618F73BA6009BAC58 /* arrow-big-01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-big-01.png"; sourceTree = "<group>"; };
+		54F4D61818F73BCD009BAC58 /* arrow-big-02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "arrow-big-02.png"; sourceTree = "<group>"; };
+		54F4D61A18F73C14009BAC58 /* folder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = folder.png; sourceTree = "<group>"; };
 		F35BFE8151F542D99D143421 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +171,13 @@
 				54DED4AC18E4A31C005FACC0 /* Main.storyboard */,
 				54DED4AF18E4A31C005FACC0 /* FLYViewController.h */,
 				54DED4B018E4A31C005FACC0 /* FLYViewController.m */,
+				54F4D5F118F5E29B009BAC58 /* FLYSplashViewController.h */,
+				54F4D5F218F5E29B009BAC58 /* FLYSplashViewController.m */,
+				54F4D5FB18F7325B009BAC58 /* FLYConnectViewController.h */,
+				54F4D5FC18F7325B009BAC58 /* FLYConnectViewController.m */,
+				54F4D5FE18F73778009BAC58 /* FLYChartViewController.h */,
+				54F4D5FF18F73778009BAC58 /* FLYChartViewController.m */,
+				54F4D5FA18F73243009BAC58 /* Managers */,
 				54DED4B218E4A31C005FACC0 /* Images.xcassets */,
 				54DED4A118E4A31C005FACC0 /* Supporting Files */,
 			);
@@ -151,6 +187,13 @@
 		54DED4A118E4A31C005FACC0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				54F4D61A18F73C14009BAC58 /* folder.png */,
+				54F4D61818F73BCD009BAC58 /* arrow-big-02.png */,
+				54F4D61618F73BA6009BAC58 /* arrow-big-01.png */,
+				54F4D61418F73B1D009BAC58 /* recycle-bin.png */,
+				54F4D61018F73A9C009BAC58 /* button-pause.png */,
+				54F4D61218F73ADC009BAC58 /* bookmark.png */,
+				54F4D60E18F73A73009BAC58 /* button-record.png */,
 				54DED4A218E4A31C005FACC0 /* Firelfy-Info.plist */,
 				54DED4A318E4A31C005FACC0 /* InfoPlist.strings */,
 				54DED4A618E4A31C005FACC0 /* main.m */,
@@ -175,6 +218,17 @@
 				54DED4C218E4A31C005FACC0 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		54F4D5FA18F73243009BAC58 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				54F4D5F418F5E701009BAC58 /* FLYConnectionManager.h */,
+				54F4D5F518F5E701009BAC58 /* FLYConnectionManager.m */,
+				54F4D5F718F5E718009BAC58 /* FLYCaseManager.h */,
+				54F4D5F818F5E718009BAC58 /* FLYCaseManager.m */,
+			);
+			name = Managers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,9 +310,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54F4D61918F73BCD009BAC58 /* arrow-big-02.png in Resources */,
+				54F4D61518F73B1D009BAC58 /* recycle-bin.png in Resources */,
+				54F4D60F18F73A73009BAC58 /* button-record.png in Resources */,
+				54F4D61118F73A9C009BAC58 /* button-pause.png in Resources */,
+				54F4D61718F73BA6009BAC58 /* arrow-big-01.png in Resources */,
 				54DED4B318E4A31C005FACC0 /* Images.xcassets in Resources */,
+				54F4D61318F73ADC009BAC58 /* bookmark.png in Resources */,
 				54DED4A518E4A31C005FACC0 /* InfoPlist.strings in Resources */,
 				54DED4AE18E4A31C005FACC0 /* Main.storyboard in Resources */,
+				54F4D61B18F73C14009BAC58 /* folder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,8 +372,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				54DED4B118E4A31C005FACC0 /* FLYViewController.m in Sources */,
+				54F4D5FD18F7325B009BAC58 /* FLYConnectViewController.m in Sources */,
+				54F4D5F618F5E701009BAC58 /* FLYConnectionManager.m in Sources */,
 				54DED4AB18E4A31C005FACC0 /* FLYAppDelegate.m in Sources */,
+				54F4D5F318F5E29B009BAC58 /* FLYSplashViewController.m in Sources */,
 				54DED4A718E4A31C005FACC0 /* main.m in Sources */,
+				54F4D5F918F5E718009BAC58 /* FLYCaseManager.m in Sources */,
+				54F4D60018F73778009BAC58 /* FLYChartViewController.m in Sources */,
 				54D39D7818E4C0A200B2AD03 /* BLE.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
