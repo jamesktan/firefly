@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CorePlot-CocoaTouch.h>
 
-@interface FLYChartViewController : UIViewController
+@interface FLYChartViewController : UIViewController <CPTPlotDataSource>
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
@@ -17,7 +18,8 @@
 @property (strong, nonatomic) IBOutlet UIButton *stopButton;
 @property (strong, nonatomic) IBOutlet UIButton *markButton;
 @property (strong, nonatomic) IBOutlet UITextField *statusField;
-
+@property (strong, nonatomic) IBOutlet UIScrollView *graphScroll;
+@property (strong, nonatomic) IBOutlet CPTGraphHostingView *graphArea;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)goSave:(id)sender;

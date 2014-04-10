@@ -237,17 +237,25 @@
                                 <fontDescription key="fontDescription" name="STHeitiTC-Light" family="Heiti TC" pointSize="15"/>
                                 <color key="highlightedColor" red="0.20000000300000001" green="0.20000000300000001" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Bc-Oe-RfB" customClass="CPTGraphHostingView">
-                                <rect key="frame" x="20" y="70" width="280" height="439"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZET-Hq-6yx">
+                                <rect key="frame" x="0.0" y="70" width="320" height="439"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Bc-Oe-RfB" customClass="CPTGraphHostingView">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="439"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    </view>
+                                </subviews>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="bvq-Bu-cbd"/>
                     <connections>
                         <outlet property="backButton" destination="x5n-Sk-vbm" id="isP-U5-vF9"/>
+                        <outlet property="graphArea" destination="5Bc-Oe-RfB" id="0lj-Lh-mW8"/>
+                        <outlet property="graphScroll" destination="ZET-Hq-6yx" id="v3H-OG-lpd"/>
                         <outlet property="markButton" destination="vsY-4D-YwR" id="lzI-rG-Src"/>
                         <outlet property="resetButton" destination="7Km-yg-O9G" id="dQj-dr-o0Z"/>
                         <outlet property="saveButton" destination="2hL-nK-nZ6" id="lE0-eW-7xO"/>
