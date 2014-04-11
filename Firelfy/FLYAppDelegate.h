@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FLYCaseManager.h"
+#import "FLYConnectionManager.h"
+
+
 @interface FLYAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

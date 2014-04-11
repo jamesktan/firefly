@@ -7,8 +7,7 @@
 //
 
 #import "FLYAppDelegate.h"
-#import "FLYCaseManager.h"
-#import "FLYConnectionManager.h"
+
 @implementation FLYAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

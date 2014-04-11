@@ -120,6 +120,7 @@
                     <connections>
                         <outlet property="backButton" destination="DS2-nP-e2o" id="D26-jb-NkI"/>
                         <outlet property="continueButton" destination="jTV-ap-nA3" id="9Bo-bv-JCr"/>
+                        <outlet property="deviceTable" destination="ovQ-Vk-1RF" id="H0k-lV-IpY"/>
                         <outlet property="scanButton" destination="SxC-Kg-CDU" id="iSd-tc-bbC"/>
                         <segue destination="jPR-FJ-9cr" kind="push" identifier="push_monitor" id="Qih-sc-aDd"/>
                     </connections>

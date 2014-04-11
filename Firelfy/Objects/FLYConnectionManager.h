@@ -7,10 +7,16 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreBluetooth/CoreBluetooth.h>
+#import "BLE.h"
 
-@interface FLYConnectionManager : NSObject
+@interface FLYConnectionManager : NSObject  <BLEDelegate> {
+    BLE * bleShield;
+    CBPeripheral * periph;
+}
+@property(strong, nonatomic) NSArray * listOfPeripherals;
 
-+ (id)      sharedInstance;
-- (void)    setupNotifications;
++ (id)          sharedInstance;
+- (void)        setupNotifications;
 
 @end

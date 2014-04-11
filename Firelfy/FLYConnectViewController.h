@@ -7,12 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MBProgressHUD.h>
+#import <CoreBluetooth/CoreBluetooth.h>
 
-@interface FLYConnectViewController : UIViewController
+@interface FLYConnectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
+    NSArray *devices;
+}
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *scanButton;
 @property (strong, nonatomic) IBOutlet UIButton *continueButton;
+@property (strong, nonatomic) IBOutlet UITableView *deviceTable;
 
 - (IBAction)goBack:(id)sender;
 - (IBAction)scanDevices:(id)sender;
