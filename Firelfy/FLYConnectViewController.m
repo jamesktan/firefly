@@ -28,6 +28,8 @@
 }
 - (void)viewDidLoad
 {
+    connectedDevices = 0;
+    
     self.deviceTable.delegate = self;
     self.deviceTable.dataSource = self;
     
@@ -60,12 +62,14 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+#pragma mark - IBActions
 - (IBAction)goBack:(id)sender {
-    
-    [self disconnectFromAllDevices];
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    if (connectedDevices > 0) {
+        [[[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"If you go back now, you will disconnect from all your bluetooth devices." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go Ahead", nil] show];
+    } else {
+        [self disconnectFromAllDevices];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)scanDevices:(id)sender {
@@ -73,7 +77,13 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"scanForDevices" object:self userInfo:nil];
 }
-
+- (IBAction)goChart:(id)sender {
+    if (connectedDevices > 0) {
+        [self performSegueWithIdentifier:@"push_monitor" sender:self];
+    } else {
+        [[[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"You cannot continue until you connect at least 1 device." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+    }
+}
 - (void) disconnectFromAllDevices {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"removeAllDevices" object:self userInfo:@{@"devices":devices}];
 }
@@ -87,10 +97,6 @@
 
 -(void)connectionChangeFinished {
     [MBProgressHUD hideHUDForView:self.view animated:YES];
-}
-
-- (IBAction)goChart:(id)sender {
-    [self performSegueWithIdentifier:@"push_monitor" sender:self];
 }
 
 #pragma mark - UITableView Delegate and DataSource Methods
@@ -121,15 +127,27 @@
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
         
         //Disconnect
+        connectedDevices -= 1;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"disconnectFromDevice" object:self userInfo: @{@"devicePosition": indexPath}];
         cell.accessoryType = UITableViewCellAccessoryNone;
 
     } else {
         //Connect
+        connectedDevices += 1;
+        
         [[NSNotificationCenter defaultCenter] postNotificationName:@"connectToDevice" object:self userInfo: @{@"devicePosition": indexPath}];
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
     }
     
 }
 
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (buttonIndex == 1) {
+        // Disconnect Prompt - Go ahead and disconnect devices.
+        [self disconnectFromAllDevices];
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+}
 @end

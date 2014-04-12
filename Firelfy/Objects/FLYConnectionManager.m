@@ -132,6 +132,9 @@
     
 //    NSArray * services = bleShield.activePeripheral.services;
 //    NSLog(@"These are services: %@", services);
+    
+    // Get the number and name of sensors
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"connectionFinished" object:self userInfo:nil];
     
 }

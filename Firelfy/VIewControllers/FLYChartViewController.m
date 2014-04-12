@@ -66,7 +66,7 @@
     // Pass the selected object to the new view controller.
 }
 */
-
+#pragma mark IBAction Methods
 - (IBAction)goBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -86,7 +86,8 @@
 - (IBAction)markChart:(id)sender {
 }
 
-#pragma mark - Datasource
+#pragma mark - Core Plot Datasource methods
+
 // This method is here because this class also functions as datasource for our graph
 // Therefore this class implements the CPTPlotDataSource protocol
 -(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plotnumberOfRecords {
