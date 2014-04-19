@@ -30,12 +30,18 @@
                                                  name:@"isReady"
                                                object:nil];
     
-    
 }
 -(void)isReady {
     if (TRUE) {
         [[NSNotificationCenter defaultCenter] postNotificationName:@"caseReady" object:self userInfo:nil];
     }
+}
+
+-(void)setupData: (NSInteger)device sensorCount: (NSInteger)count {
+    
+}
+-(void)captureData: (NSInteger)device sensor: (NSInteger)sensor data: (NSInteger)data {
+    
 }
 
 

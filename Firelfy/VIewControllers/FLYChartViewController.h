@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <CorePlot-CocoaTouch.h>
+#import "FLYDeviceManager.h"
 
-@interface FLYChartViewController : UIViewController <CPTPlotDataSource>
+@interface FLYChartViewController : UIViewController {
+    int xmin, xmax;
+    int deviceCount;
+}
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;

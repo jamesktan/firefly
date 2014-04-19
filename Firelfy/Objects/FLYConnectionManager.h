@@ -9,10 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 #import "BLE.h"
+#import "FLYDeviceManager.h"
 
 @interface FLYConnectionManager : NSObject  <BLEDelegate> {
     BLE * bleShield;
     CBPeripheral * periph;
+    FLYDeviceManager *DEVICE_MANAGER;
 }
 @property(strong, nonatomic) NSArray * listOfPeripherals;
 

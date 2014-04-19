@@ -73,10 +73,6 @@
     
 }
 -(void)bleDidDisconnect {
-    /*
-     bleDidDisconnect
-     Delegate method letting the controller know that the device was disconnected!
-     */
     NSLog(@"bleDidDisconnect Fired");
     self.disconnectButton.hidden = TRUE;
     self.deviceID.text = @"";
@@ -86,10 +82,6 @@
 
 }
 -(void)bleDidConnect {
-    /*
-     bleDidConnect
-     Delegate method letting the controller know that the device connected successfully
-     */
     NSLog(@"bleDidConnect Fired");
     self.disconnectButton.hidden = FALSE;
     
@@ -100,13 +92,7 @@
     NSLog(@"These are services: %@", services);
     
 }
-
 -(void)bleDidFindDevice {
-    /*
-     bleDidFindDevice
-     Delegate method letting the controller know that the device has been found.
-     */
-    
     NSArray * listOfPeripherals = bleShield.peripherals;
     
     if ([listOfPeripherals count]) {
@@ -116,4 +102,13 @@
     }
 
 }
+-(void)bleDidReceiveData:(unsigned char *)data length:(int)length {
+    NSData *d = [NSData dataWithBytes:data length:length];
+    NSString *s = [[NSString alloc] initWithData:d encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", s);
+}
+-(void) bleDidUpdateRSSI:(NSNumber *)rssi {
+    
+}
+
 @end

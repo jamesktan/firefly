@@ -7,8 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface FLYCaseManager : NSObject
+#import "FLYCase.h"
+@interface FLYCaseManager : NSObject {
+    FLYCase * currentCase;
+}
 
 + (id) sharedInstance;
 - (void) setupNotifications;

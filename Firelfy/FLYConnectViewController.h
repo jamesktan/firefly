@@ -7,12 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLYConnectionManager.h"
+
 #import <MBProgressHUD.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
 @interface FLYConnectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     NSArray *devices;
     NSInteger connectedDevices;
+    
+    FLYConnectionManager *ConnectionManager;
 }
 
 @property (strong, nonatomic) IBOutlet UIButton *backButton;

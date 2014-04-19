@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		4BA91550371D41EF9E8BB6CD /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F35BFE8151F542D99D143421 /* libPods.a */; };
+		54145F1F19028D66008F6723 /* FLYCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F1E19028D66008F6723 /* FLYCase.m */; };
+		54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F21190297B6008F6723 /* FLYDeviceManager.m */; };
+		54145F2519029830008F6723 /* FLYDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F2419029830008F6723 /* FLYDevice.m */; };
 		54D39D7418E4A7EA00B2AD03 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */; };
 		54D39D7818E4C0A200B2AD03 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D39D7618E4C0A200B2AD03 /* BLE.m */; };
 		54DED49B18E4A31C005FACC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DED49A18E4A31C005FACC0 /* Foundation.framework */; };
@@ -50,6 +53,12 @@
 
 /* Begin PBXFileReference section */
 		1D6ED74C18F5463197B442A5 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		54145F1D19028D66008F6723 /* FLYCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYCase.h; sourceTree = "<group>"; };
+		54145F1E19028D66008F6723 /* FLYCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYCase.m; sourceTree = "<group>"; };
+		54145F20190297B6008F6723 /* FLYDeviceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDeviceManager.h; sourceTree = "<group>"; };
+		54145F21190297B6008F6723 /* FLYDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceManager.m; sourceTree = "<group>"; };
+		54145F2319029830008F6723 /* FLYDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDevice.h; sourceTree = "<group>"; };
+		54145F2419029830008F6723 /* FLYDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDevice.m; sourceTree = "<group>"; };
 		54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		54D39D7518E4C0A200B2AD03 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		54D39D7618E4C0A200B2AD03 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
@@ -225,8 +234,14 @@
 			children = (
 				54F4D5F418F5E701009BAC58 /* FLYConnectionManager.h */,
 				54F4D5F518F5E701009BAC58 /* FLYConnectionManager.m */,
+				54145F20190297B6008F6723 /* FLYDeviceManager.h */,
+				54145F21190297B6008F6723 /* FLYDeviceManager.m */,
+				54145F2319029830008F6723 /* FLYDevice.h */,
+				54145F2419029830008F6723 /* FLYDevice.m */,
 				54F4D5F718F5E718009BAC58 /* FLYCaseManager.h */,
 				54F4D5F818F5E718009BAC58 /* FLYCaseManager.m */,
+				54145F1D19028D66008F6723 /* FLYCase.h */,
+				54145F1E19028D66008F6723 /* FLYCase.m */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -372,8 +387,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				54DED4B118E4A31C005FACC0 /* FLYViewController.m in Sources */,
+				54145F2519029830008F6723 /* FLYDevice.m in Sources */,
 				54F4D5FD18F7325B009BAC58 /* FLYConnectViewController.m in Sources */,
+				54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */,
 				54F4D5F618F5E701009BAC58 /* FLYConnectionManager.m in Sources */,
+				54145F1F19028D66008F6723 /* FLYCase.m in Sources */,
 				54DED4AB18E4A31C005FACC0 /* FLYAppDelegate.m in Sources */,
 				54F4D5F318F5E29B009BAC58 /* FLYSplashViewController.m in Sources */,
 				54DED4A718E4A31C005FACC0 /* main.m in Sources */,

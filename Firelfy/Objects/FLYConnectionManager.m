@@ -54,6 +54,27 @@
                                              selector:@selector(removeAllDevices:)
                                                  name:@"removeAllDevices"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(writeStart)
+                                                 name:@"start"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(writeStop)
+                                                 name:@"stop"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(writeReset)
+                                                 name:@"reset"
+                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(writeSample:)
+                                                 name:@"sample"
+                                               object:nil];
+    
+    DEVICE_MANAGER = [FLYDeviceManager sharedInstance];
+
+    
 
 
 
@@ -99,43 +120,89 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"connectionReady" object:self userInfo:nil];
 }
 
-#pragma mark - RedBear BLE Module Methods
+#pragma mark - RedBear Writing Methods
+-(void)writeStart {
+    UInt8 buf[3] = {0x01, 0x00, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
+    [bleShield write:data];
+}
 
--(void)bleDidFindDevice {
-    /*
-     bleDidFindDevice
-     Delegate method letting the controller know that the device has been found.
-     */
+-(void)writeStop {
+    UInt8 buf[3] = {0x02, 0x00, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
+    [bleShield write:data];
+}
+
+-(void)writeReset {
+    UInt8 buf[3] = {0x03, 0x00, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
+    [bleShield write:data];
+}
+-(void)writeSample:(NSNotification*) notif {
+    NSInteger val = ((NSString*)[[notif userInfo] objectForKey:@"values"]).integerValue;
+    UInt8 buf[3] = {0x04, 0x01, 0x00};
+    buf[1] = val;
+    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
+    [bleShield write:data];
+}
+-(void)writeSensor {
+    UInt8 buf[3] = {0x05, 0x00, 0x00};
+    NSData *data = [[NSData alloc] initWithBytes:buf length:3];
+    [bleShield write:data];
+}
+
+#pragma mark - RedBear BLE Module Methods
+-(void) bleDidUpdateRSSI:(NSNumber *)rssi {
     
+}
+-(void)bleDidFindDevice {
     self.listOfPeripherals = bleShield.peripherals;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"devicesFound" object:self userInfo:@{@"devices": self.listOfPeripherals}];
 }
 
 -(void)bleDidDisconnect {
-    /*
-     bleDidDisconnect
-     Delegate method letting the controller know that the device was disconnected!
-     */
     NSLog(@"bleDidDisconnect Fired");
     [[NSNotificationCenter defaultCenter] postNotificationName:@"connectionFinished" object:self userInfo:nil];
     
 }
 -(void)bleDidConnect {
-    /*
-     bleDidConnect
-     Delegate method letting the controller know that the device connected successfully
-     */
     NSLog(@"bleDidConnect Fired");
     
-//    [bleShield getAllServicesFromPeripheral:bleShield.activePeripheral];
-//    [bleShield getAllCharacteristicsFromPeripheral:bleShield.activePeripheral];
+    [bleShield getAllServicesFromPeripheral:bleShield.activePeripheral];
+    [bleShield getAllCharacteristicsFromPeripheral:bleShield.activePeripheral];
     
-//    NSArray * services = bleShield.activePeripheral.services;
-//    NSLog(@"These are services: %@", services);
+    NSArray * services = bleShield.activePeripheral.services;
+    NSLog(@"These are services: %@", services);
     
     // Get the number and name of sensors
+    [self writeSensor];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"connectionFinished" object:self userInfo:nil];
+    
+}
+-(void)bleDidReceiveData:(unsigned char *)data length:(int)length {
+    
+    NSLog(@"Length: %d", length);
+    
+    // if the message is about sensor count
+    if (data[0] == 0x05) {
+        UInt16 sensorCount = data[2];
+        
+        NSLog(@"Recieved - Device: %d SensorCount:%d", data[1], sensorCount);
+        
+        // Create the Devices
+        if(![DEVICE_MANAGER isInDeviceStore:data[1]]) {
+            [DEVICE_MANAGER createDevice:data[1] sensorCount:sensorCount];
+        }
+    }
+    
+    // if the message is about data
+    if (data[0] == 0x06) {
+        if ([DEVICE_MANAGER isInDeviceStore:data[1]]) {
+            [DEVICE_MANAGER storeData: [NSDate date] device: data[1] data: data length:length];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"updateGraph" object:self];
+        }
+    }
     
 }
 
