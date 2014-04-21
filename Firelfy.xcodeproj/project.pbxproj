@@ -11,6 +11,9 @@
 		54145F1F19028D66008F6723 /* FLYCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F1E19028D66008F6723 /* FLYCase.m */; };
 		54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F21190297B6008F6723 /* FLYDeviceManager.m */; };
 		54145F2519029830008F6723 /* FLYDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F2419029830008F6723 /* FLYDevice.m */; };
+		54B9899D1905B46100A67261 /* FLYUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B9899C1905B46100A67261 /* FLYUtility.m */; };
+		54B9899F1905B95700A67261 /* bee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B9899E1905B95700A67261 /* bee@2x.png */; };
+		54B989A11905C06700A67261 /* backward-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989A01905C06700A67261 /* backward-7@2x.png */; };
 		54D39D7418E4A7EA00B2AD03 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */; };
 		54D39D7818E4C0A200B2AD03 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D39D7618E4C0A200B2AD03 /* BLE.m */; };
 		54DED49B18E4A31C005FACC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DED49A18E4A31C005FACC0 /* Foundation.framework */; };
@@ -59,6 +62,10 @@
 		54145F21190297B6008F6723 /* FLYDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceManager.m; sourceTree = "<group>"; };
 		54145F2319029830008F6723 /* FLYDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDevice.h; sourceTree = "<group>"; };
 		54145F2419029830008F6723 /* FLYDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDevice.m; sourceTree = "<group>"; };
+		54B9899B1905B46100A67261 /* FLYUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtility.h; sourceTree = "<group>"; };
+		54B9899C1905B46100A67261 /* FLYUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUtility.m; sourceTree = "<group>"; };
+		54B9899E1905B95700A67261 /* bee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bee@2x.png"; sourceTree = "<group>"; };
+		54B989A01905C06700A67261 /* backward-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward-7@2x.png"; sourceTree = "<group>"; };
 		54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		54D39D7518E4C0A200B2AD03 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		54D39D7618E4C0A200B2AD03 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
@@ -196,6 +203,8 @@
 		54DED4A118E4A31C005FACC0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				54B989A01905C06700A67261 /* backward-7@2x.png */,
+				54B9899E1905B95700A67261 /* bee@2x.png */,
 				54F4D61A18F73C14009BAC58 /* folder.png */,
 				54F4D61818F73BCD009BAC58 /* arrow-big-02.png */,
 				54F4D61618F73BA6009BAC58 /* arrow-big-01.png */,
@@ -232,6 +241,8 @@
 		54F4D5FA18F73243009BAC58 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				54B9899B1905B46100A67261 /* FLYUtility.h */,
+				54B9899C1905B46100A67261 /* FLYUtility.m */,
 				54F4D5F418F5E701009BAC58 /* FLYConnectionManager.h */,
 				54F4D5F518F5E701009BAC58 /* FLYConnectionManager.m */,
 				54145F20190297B6008F6723 /* FLYDeviceManager.h */,
@@ -330,9 +341,11 @@
 				54F4D60F18F73A73009BAC58 /* button-record.png in Resources */,
 				54F4D61118F73A9C009BAC58 /* button-pause.png in Resources */,
 				54F4D61718F73BA6009BAC58 /* arrow-big-01.png in Resources */,
+				54B9899F1905B95700A67261 /* bee@2x.png in Resources */,
 				54DED4B318E4A31C005FACC0 /* Images.xcassets in Resources */,
 				54F4D61318F73ADC009BAC58 /* bookmark.png in Resources */,
 				54DED4A518E4A31C005FACC0 /* InfoPlist.strings in Resources */,
+				54B989A11905C06700A67261 /* backward-7@2x.png in Resources */,
 				54DED4AE18E4A31C005FACC0 /* Main.storyboard in Resources */,
 				54F4D61B18F73C14009BAC58 /* folder.png in Resources */,
 			);
@@ -388,6 +401,7 @@
 			files = (
 				54DED4B118E4A31C005FACC0 /* FLYViewController.m in Sources */,
 				54145F2519029830008F6723 /* FLYDevice.m in Sources */,
+				54B9899D1905B46100A67261 /* FLYUtility.m in Sources */,
 				54F4D5FD18F7325B009BAC58 /* FLYConnectViewController.m in Sources */,
 				54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */,
 				54F4D5F618F5E701009BAC58 /* FLYConnectionManager.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "FLYUtility.h"
 @interface FLYSplashViewController : UIViewController {
     BOOL connectionReady;
     BOOL caseReady;

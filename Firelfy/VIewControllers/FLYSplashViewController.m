@@ -30,6 +30,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[FLYUtility sharedInstance] setButtonRounded:self.caseNewButton];
+    [[FLYUtility sharedInstance] setButtonRounded:self.caseExistingButton];
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,4 +60,9 @@
     [self performSegueWithIdentifier:@"pushOpen" sender:self];
 
 }
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 @end

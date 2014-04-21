@@ -12,6 +12,7 @@
 #import <MBProgressHUD.h>
 #import <CoreBluetooth/CoreBluetooth.h>
 
+#import "FLYUtility.h"
 @interface FLYConnectViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UIAlertViewDelegate> {
     NSArray *devices;
     NSInteger connectedDevices;

@@ -28,6 +28,8 @@
 }
 - (void)viewDidLoad
 {
+    [[FLYUtility sharedInstance] setButtonRounded:self.scanButton];
+    [[FLYUtility sharedInstance] setButtonRounded:self.continueButton];
     connectedDevices = 0;
     
     self.deviceTable.delegate = self;
@@ -150,4 +152,9 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
+
+-(UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
+}
+
 @end
