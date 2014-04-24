@@ -11,9 +11,11 @@
 @interface FLYSplashViewController : UIViewController {
     BOOL connectionReady;
     BOOL caseReady;
+    UIImage * highlight;
 }
 
 @property (strong, nonatomic) IBOutlet UILabel *splashTitleLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *fireflyImage;
 
 @property (strong, nonatomic) IBOutlet UIButton *caseExistingButton;
 @property (strong, nonatomic) IBOutlet UIButton *caseNewButton;

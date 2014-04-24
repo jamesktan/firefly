@@ -23,17 +23,93 @@
     return self;
 }
 - (void)viewWillAppear:(BOOL)animated {
-    [self.navigationController setNavigationBarHidden:TRUE];
-}
+    [[self navigationController] setNavigationBarHidden:YES animated:YES];
 
+}
+-(void)viewDidAppear:(BOOL)animated {
+    
+//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+//        UIImage * img = [UIImage imageNamed:@"bee@2x_highlighted.png"];
+//        UIImage *imgOff = [UIImage imageNamed:@"bee@2x.png"];
+//        
+//        // Make a trivial (1x1) graphics context, and draw the image into it
+//        UIGraphicsBeginImageContext(CGSizeMake(1,1));
+//        CGContextRef context = UIGraphicsGetCurrentContext();
+//        CGContextDrawImage(context, CGRectMake(0, 0, 1, 1), [img CGImage]);
+//        UIGraphicsEndImageContext();
+//        
+//        UIGraphicsBeginImageContext(CGSizeMake(1,1));
+//        CGContextRef context2 = UIGraphicsGetCurrentContext();
+//        CGContextDrawImage(context2, CGRectMake(0, 0, 1, 1), [imgOff CGImage]);
+//        UIGraphicsEndImageContext();
+//
+//        
+//        // Now the image will have been loaded and decoded and is ready to rock for the main thread
+//        dispatch_sync(dispatch_get_main_queue(), ^{
+//            
+//            while (TRUE) {
+//                int randNum = rand() % (4 - 1) + 1; //create the random number.
+//                
+//                [self.fireflyImage setImage:img];
+//                [NSThread sleepForTimeInterval:randNum];
+//                [self.fireflyImage setImage:imgOff];
+//                [NSThread sleepForTimeInterval:randNum];
+//                
+//                
+//                
+//            }
+//
+//            [self.fireflyImage setImage:img];
+//        });
+//    });
+//
+    
+}
+//- (void)flicker {
+//    while (TRUE) {
+//        int randNum = rand() % (4 - 1) + 1; //create the random number.
+//
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"flickOn" object:self];
+//        [NSThread sleepForTimeInterval:randNum];
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"flickOff" object:self];
+//        [NSThread sleepForTimeInterval:randNum];
+//
+//
+//
+//    }
+//    
+//    
+//}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [[FLYUtility sharedInstance] setButtonRounded:self.caseNewButton];
     [[FLYUtility sharedInstance] setButtonRounded:self.caseExistingButton];
+
+    highlight = [UIImage imageNamed:@"bee@2x_highlighted.png"];
+
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(flickOn)
+//                                                 name:@"flickOn"
+//                                               object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(flickOff)
+//                                                 name:@"flickOff"
+//                                               object:nil];
+
 }
 
+//-(void)flickOn {
+//
+//    [self.fireflyImage setImage:highlight];
+//    
+//}
+//-(void)flickOff {
+//    [self.fireflyImage setImage:highlight];
+//
+//    
+//}
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -61,8 +137,10 @@
 
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
     return UIStatusBarStyleLightContent;
 }
+
 
 @end

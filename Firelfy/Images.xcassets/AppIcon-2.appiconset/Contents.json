@@ -3,18 +3,19 @@
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "fireflyAppIcon-1.png",
+      "filename" : "fireflyAppIcon58.png",
+      "scale" : "2x"
+    },
+    {
+      "size" : "60x60",
+      "idiom" : "iphone",
+      "filename" : "fireflyAppIcon120.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "fireflyAppIcon.png",
-      "scale" : "2x"
-    },
-    {
-      "idiom" : "iphone",
-      "size" : "60x60",
+      "filename" : "fireflyAppIcon80.png",
       "scale" : "2x"
     }
   ],
