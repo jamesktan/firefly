@@ -36,52 +36,73 @@
     CPTXYPlotSpace *plotSpace = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     
     // Note that these CPTPlotRange are defined by START and LENGTH (not START and END) !!
-    [plotSpace setYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat( 0 ) length:CPTDecimalFromFloat( 16 )]];
-    [plotSpace setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat( -4 ) length:CPTDecimalFromFloat( 8 )]];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(updateGraph)
-                                                 name:@"updateGraph"
-                                               object:nil];
-
-    // Create the plot (we do not define actual x/y values yet, these will be supplied by the datasource...)
-//    CPTScatterPlot* plot = [[CPTScatterPlot alloc] initWithFrame:CGRectZero];
-//    CPTScatterPlot * plot2 = [[CPTScatterPlot alloc] initWithFrame:CGRectZero];
-//    plot2.name = @"HELLO";
-    
-    // Let's keep it simple and let this class act as datasource (therefore we implemtn <CPTPlotDataSource>)
-//    plot.dataSource = self;
-//    plot2.dataSource = self;
-    
-    
-    // Finally, add the created plot to the default plot space of the CPTGraph object we created before
-//    [graph addPlot:plot toPlotSpace:graph.defaultPlotSpace];
-//    [graph addPlot:plot2 toPlotSpace:graph.defaultPlotSpace];
+    [plotSpace setYRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat( 0 ) length:CPTDecimalFromFloat( 50 )]];
+    [plotSpace setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat( 0 ) length:CPTDecimalFromFloat( 10 )]];
     
     CPTXYPlotSpace *plotSpace2 = (CPTXYPlotSpace *) graph.defaultPlotSpace;
     plotSpace2.allowsUserInteraction = YES;
 
     xmin = -4;
     xmax = 8;
-
+    
+    // Create the color array
+    colorArray = [[NSMutableArray alloc] init];
+    CPTColor * red = [CPTColor colorWithComponentRed:221.0f/255.0f green:27.0f/255.0f blue:27.0f/255.0f alpha:1.0];
+    CPTColor * yellow = [CPTColor colorWithComponentRed:243.0f/255.0f green:229.0f/255.0f blue:129.0f/255.0f alpha:1.0];
+    CPTColor * blue = [CPTColor colorWithComponentRed:105.0f/255.0f green:210.0f/255.0f blue:231.0f/255.0f alpha:1.0];
+    CPTColor * white = [CPTColor colorWithComponentRed:246.0f/255.0f green:246.0f/255.0f blue:246.0f/255.0f alpha:1.0];
+    CPTColor * orange = [CPTColor colorWithComponentRed:235.0f/255.0f green:89.0f/255.0f blue:60.0f/255.0f alpha:1.0];
+    CPTColor * lightBlue = [CPTColor colorWithComponentRed:167.0f/255.0f green:219.0f/255.0f blue:216.0f/255.0f alpha:1.0];
+    [colorArray addObjectsFromArray:@[red, yellow, blue, white, orange, lightBlue]];
+    
+    
+    // Setup the Notifications
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(updateGraph)
+                                                 name:@"updateGraph"
+                                               object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    
 
 }
 
 -(void)viewWillAppear:(BOOL)animated {
     // Get Number of Devices
-    FLYDeviceManager * DEVICE_MANAGER = ((FLYDeviceManager*)[FLYDeviceManager sharedInstance]);
+    DEVICE_MANAGER = ((FLYDeviceManager*)[FLYDeviceManager sharedInstance]);
     deviceCount = [DEVICE_MANAGER.deviceStore count];
     
     // For Each Device, get the count
     for (FLYDevice * device in DEVICE_MANAGER.deviceStore) {
         int d = device.deviceCount.integerValue;
         for (int a = 0; a < d; a++) {
-            CPTScatterPlot * plot = [[CPTScatterPlot alloc] initWithFrame:CGRectZero];
             
+            // Create the Plot
+            CPTScatterPlot * plot = [[CPTScatterPlot alloc] initWithFrame:CGRectZero];
             plot.dataSource = device;
             
+            // Identify the Plot
             NSString *plotName = [NSString stringWithFormat:@"%d - %d",device.deviceID.integerValue, a ];
             plot.name = plotName;
+            
+            // Style the Plot Line
+            CPTMutableLineStyle *lineStyle = [CPTMutableLineStyle lineStyle];
+            lineStyle.miterLimit        = .7;
+            lineStyle.lineWidth         = .7;
+            lineStyle.lineColor         = [colorArray objectAtIndex:a];
+            plot.dataLineStyle = lineStyle;
+
+            // Style the Plot Symbol
+            CPTMutableLineStyle *symbolLineStyle = [CPTMutableLineStyle lineStyle];
+            symbolLineStyle.lineColor = [colorArray objectAtIndex:a];
+            CPTPlotSymbol *plotSymbol = [CPTPlotSymbol ellipsePlotSymbol];
+            plotSymbol.fill          = [CPTFill fillWithColor:[colorArray objectAtIndex:a]];
+            plotSymbol.lineStyle     = symbolLineStyle;
+            plotSymbol.size          = CGSizeMake(5.0, 5.0);
+            plot.plotSymbol = plotSymbol;
+
+            
             
             [self.graphArea.hostedGraph addPlot:plot];
         }
@@ -109,6 +130,19 @@
 
 -(void) updateGraph {
     [self.graphArea.hostedGraph reloadData];
+    
+    // Calculate the Range Movement
+    NSInteger  count = [[((FLYDevice*)[DEVICE_MANAGER.deviceStore firstObject]).dataStores firstObject] count];
+    CPTXYPlotSpace * plotspace = (CPTXYPlotSpace *) self.graphArea.hostedGraph.defaultPlotSpace;
+    xmax = 10.0;
+    [plotspace setXRange:[CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat( (float)(count-10) ) length:CPTDecimalFromFloat( xmax )]];
+    
+    // Calculate the Duration of the sample
+    NSInteger samplingRate = self.statusField.text.integerValue;
+    float duration = count * (samplingRate/1000); // divide 1000 because milliseconds
+    NSString * durationString = [NSString stringWithFormat:@"%3.2fs", duration];
+    [self.durationLabel setText:durationString];
+
 }
 
 #pragma mark IBAction Methods
@@ -120,69 +154,92 @@
 }
 
 - (IBAction)goSave:(id)sender {
-//    NSLog(@"Save Pressed");
-//    CPTXYPlotSpace * plotspace = (CPTXYPlotSpace *) self.graphArea.hostedGraph.defaultPlotSpace;
-//    xmin += 1;
-//    xmax += 1;
-//    [plotspace setXRange: [CPTPlotRange plotRangeWithLocation:CPTDecimalFromFloat( xmin ) length:CPTDecimalFromFloat( xmax )]];
+    
+    // Turn off the Streaming
+    if (self.startButton.isSelected) {
+        [self toggleChartStopStart:self.startButton];
+    }
+    
+    // Save the Chart to Local
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"test.plist"]; //Add the file name
+    [((FLYDevice*)[DEVICE_MANAGER.deviceStore objectAtIndex:0]).dataStores writeToFile:filePath atomically:YES]; //Write the file
+
+    [DEVICE_MANAGER storeFilePath:filePath];
+    
+    [self performSegueWithIdentifier:@"push_save" sender:self];
 
     
-    
-}
-
-- (IBAction)resetChart:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"reset" object:self userInfo:nil];
 }
 
 - (IBAction)startChart:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"start" object:self userInfo:nil];
+    // delay is in ms, 1000ms per s
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"start" object:self userInfo:@{@"sampleRate":self.statusField.text}];
+    [self.statusLabel setText:@"recording"];
 }
 
 - (IBAction)stopChart:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:self userInfo:nil];
+    [self.statusLabel setText:@"paused"];
 }
 
-- (IBAction)markChart:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"sample" object:self userInfo:@{@"values":self.statusField.text}];
+- (IBAction)toggleChartStopStart:(UIButton *)sender {
+    if (!sender.selected) {
+        [self startChart:self];
+        [sender setSelected:TRUE];
+    } else {
+        [self stopChart:self];
+        [sender setSelected:FALSE];
+    }
 }
 
-//#pragma mark - Core Plot Datasource methods
-//
-//// This method is here because this class also functions as datasource for our graph
-//// Therefore this class implements the CPTPlotDataSource protocol
-//-(NSUInteger)numberOfRecordsForPlot:(CPTPlot *)plotnumberOfRecords {
-//    return 9; // Our sample graph contains 9 'points'
-//}
-//
-//// This method is here because this class also functions as datasource for our graph
-//// Therefore this class implements the CPTPlotDataSource protocol
-//-(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
-//{
-//    if ([plot.name isEqualToString: @"HELLO"]) {
-//        // We need to provide an X or Y (this method will be called for each) value for every index
-//        int x = index - 4;
-//        
-//        // This method is actually called twice per point in the plot, one for the X and one for the Y value
-//        if(fieldEnum == CPTScatterPlotFieldX)
-//        {
-//            // Return x value, which will, depending on index, be between -4 to 4
-//            return [NSNumber numberWithInt: x ];
-//        } else {
-//            // Return y value, for this example we'll be plotting y = x * x
-//            return [NSNumber numberWithInt: x * x + 5];
-//        }
-//    }
-//    // We need to provide an X or Y (this method will be called for each) value for every index
-//    int x = index - 4;
-//    
-//    // This method is actually called twice per point in the plot, one for the X and one for the Y value
-//    if(fieldEnum == CPTScatterPlotFieldX)
-//    {
-//        // Return x value, which will, depending on index, be between -4 to 4
-//        return [NSNumber numberWithInt: x];
-//    } else {
-//        // Return y value, for this example we'll be plotting y = x * x
-//        return [NSNumber numberWithInt: x * x];
-//    }
-//}
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [self.statusField resignFirstResponder];
+}
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+
+- (void)keyboardDidShow:(NSNotification *)notification
+{
+    // Determine Up
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGFloat screenHeight = screenRect.size.height;
+    NSInteger upAmount = 120;
+    if (screenHeight == 568) {
+        upAmount = 215;
+    }
+    //Assign new frame to your view
+    
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [self.view setFrame:CGRectMake(0,-upAmount,320,screenHeight)];
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                     }
+     ];
+    
+}
+
+-(void)keyboardDidHide:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.3
+                          delay:0.0
+                        options: UIViewAnimationOptionCurveEaseInOut
+                     animations:^{
+                         [self.view setFrame:CGRectMake(0,0,320,568)];
+                     }
+                     completion: ^(BOOL finished) {
+                         
+                     }
+     ];
+}
+
+
 @end

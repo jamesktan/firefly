@@ -14,6 +14,18 @@
 		54B9899D1905B46100A67261 /* FLYUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B9899C1905B46100A67261 /* FLYUtility.m */; };
 		54B9899F1905B95700A67261 /* bee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B9899E1905B95700A67261 /* bee@2x.png */; };
 		54B989A11905C06700A67261 /* backward-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989A01905C06700A67261 /* backward-7@2x.png */; };
+		54B989A31905C80C00A67261 /* foward-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989A21905C80C00A67261 /* foward-7@2x.png */; };
+		54B989A519085D4700A67261 /* box-up-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989A419085D4700A67261 /* box-up-7@2x.png */; };
+		54B989A919085E3A00A67261 /* button-record-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989A819085E3A00A67261 /* button-record-mini@2x.png */; };
+		54B989AB19085E4800A67261 /* button-stop-mini@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989AA19085E4800A67261 /* button-stop-mini@2x.png */; };
+		54B989AF19085FF000A67261 /* button-stop.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989AE19085FF000A67261 /* button-stop.png */; };
+		54B989B11908623800A67261 /* button-record@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989B01908623800A67261 /* button-record@2x.png */; };
+		54B989B31908627500A67261 /* button-record_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989B21908627500A67261 /* button-record_new@2x.png */; };
+		54B989B81908633800A67261 /* button-stop_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989B61908633800A67261 /* button-stop_new@2x.png */; };
+		54B989B91908633800A67261 /* diskette_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989B71908633800A67261 /* diskette_new@2x.png */; };
+		54B989BC190978A400A67261 /* FLYSaveCaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B989BB190978A400A67261 /* FLYSaveCaseViewController.m */; };
+		54B989C01909835500A67261 /* button-pause_new@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989BF1909835500A67261 /* button-pause_new@2x.png */; };
+		54B989C31909C32D00A67261 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54B989C21909C32D00A67261 /* MessageUI.framework */; };
 		54D39D7418E4A7EA00B2AD03 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */; };
 		54D39D7818E4C0A200B2AD03 /* BLE.m in Sources */ = {isa = PBXBuildFile; fileRef = 54D39D7618E4C0A200B2AD03 /* BLE.m */; };
 		54DED49B18E4A31C005FACC0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54DED49A18E4A31C005FACC0 /* Foundation.framework */; };
@@ -66,6 +78,19 @@
 		54B9899C1905B46100A67261 /* FLYUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUtility.m; sourceTree = "<group>"; };
 		54B9899E1905B95700A67261 /* bee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bee@2x.png"; sourceTree = "<group>"; };
 		54B989A01905C06700A67261 /* backward-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "backward-7@2x.png"; sourceTree = "<group>"; };
+		54B989A21905C80C00A67261 /* foward-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "foward-7@2x.png"; sourceTree = "<group>"; };
+		54B989A419085D4700A67261 /* box-up-7@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "box-up-7@2x.png"; sourceTree = "<group>"; };
+		54B989A819085E3A00A67261 /* button-record-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-record-mini@2x.png"; sourceTree = "<group>"; };
+		54B989AA19085E4800A67261 /* button-stop-mini@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-stop-mini@2x.png"; sourceTree = "<group>"; };
+		54B989AE19085FF000A67261 /* button-stop.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-stop.png"; sourceTree = "<group>"; };
+		54B989B01908623800A67261 /* button-record@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-record@2x.png"; sourceTree = "<group>"; };
+		54B989B21908627500A67261 /* button-record_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-record_new@2x.png"; sourceTree = "<group>"; };
+		54B989B61908633800A67261 /* button-stop_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-stop_new@2x.png"; sourceTree = "<group>"; };
+		54B989B71908633800A67261 /* diskette_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diskette_new@2x.png"; sourceTree = "<group>"; };
+		54B989BA190978A400A67261 /* FLYSaveCaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYSaveCaseViewController.h; sourceTree = "<group>"; };
+		54B989BB190978A400A67261 /* FLYSaveCaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYSaveCaseViewController.m; sourceTree = "<group>"; };
+		54B989BF1909835500A67261 /* button-pause_new@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "button-pause_new@2x.png"; sourceTree = "<group>"; };
+		54B989C21909C32D00A67261 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		54D39D7518E4C0A200B2AD03 /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
 		54D39D7618E4C0A200B2AD03 /* BLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLE.m; sourceTree = "<group>"; };
@@ -114,6 +139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54B989C31909C32D00A67261 /* MessageUI.framework in Frameworks */,
 				54D39D7418E4A7EA00B2AD03 /* CoreBluetooth.framework in Frameworks */,
 				54DED49D18E4A31C005FACC0 /* CoreGraphics.framework in Frameworks */,
 				54DED49F18E4A31C005FACC0 /* UIKit.framework in Frameworks */,
@@ -168,6 +194,7 @@
 		54DED49918E4A31C005FACC0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				54B989C21909C32D00A67261 /* MessageUI.framework */,
 				54D39D7918E4C0AD00B2AD03 /* BLE */,
 				54D39D7318E4A7EA00B2AD03 /* CoreBluetooth.framework */,
 				54DED49A18E4A31C005FACC0 /* Foundation.framework */,
@@ -193,6 +220,8 @@
 				54F4D5FC18F7325B009BAC58 /* FLYConnectViewController.m */,
 				54F4D5FE18F73778009BAC58 /* FLYChartViewController.h */,
 				54F4D5FF18F73778009BAC58 /* FLYChartViewController.m */,
+				54B989BA190978A400A67261 /* FLYSaveCaseViewController.h */,
+				54B989BB190978A400A67261 /* FLYSaveCaseViewController.m */,
 				54F4D5FA18F73243009BAC58 /* Managers */,
 				54DED4B218E4A31C005FACC0 /* Images.xcassets */,
 				54DED4A118E4A31C005FACC0 /* Supporting Files */,
@@ -203,6 +232,16 @@
 		54DED4A118E4A31C005FACC0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				54B989BF1909835500A67261 /* button-pause_new@2x.png */,
+				54B989B61908633800A67261 /* button-stop_new@2x.png */,
+				54B989B71908633800A67261 /* diskette_new@2x.png */,
+				54B989B21908627500A67261 /* button-record_new@2x.png */,
+				54B989B01908623800A67261 /* button-record@2x.png */,
+				54B989AE19085FF000A67261 /* button-stop.png */,
+				54B989AA19085E4800A67261 /* button-stop-mini@2x.png */,
+				54B989A819085E3A00A67261 /* button-record-mini@2x.png */,
+				54B989A419085D4700A67261 /* box-up-7@2x.png */,
+				54B989A21905C80C00A67261 /* foward-7@2x.png */,
 				54B989A01905C06700A67261 /* backward-7@2x.png */,
 				54B9899E1905B95700A67261 /* bee@2x.png */,
 				54F4D61A18F73C14009BAC58 /* folder.png */,
@@ -336,17 +375,27 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54B989A31905C80C00A67261 /* foward-7@2x.png in Resources */,
 				54F4D61918F73BCD009BAC58 /* arrow-big-02.png in Resources */,
 				54F4D61518F73B1D009BAC58 /* recycle-bin.png in Resources */,
 				54F4D60F18F73A73009BAC58 /* button-record.png in Resources */,
 				54F4D61118F73A9C009BAC58 /* button-pause.png in Resources */,
+				54B989AB19085E4800A67261 /* button-stop-mini@2x.png in Resources */,
+				54B989B91908633800A67261 /* diskette_new@2x.png in Resources */,
 				54F4D61718F73BA6009BAC58 /* arrow-big-01.png in Resources */,
 				54B9899F1905B95700A67261 /* bee@2x.png in Resources */,
 				54DED4B318E4A31C005FACC0 /* Images.xcassets in Resources */,
+				54B989A919085E3A00A67261 /* button-record-mini@2x.png in Resources */,
 				54F4D61318F73ADC009BAC58 /* bookmark.png in Resources */,
+				54B989A519085D4700A67261 /* box-up-7@2x.png in Resources */,
 				54DED4A518E4A31C005FACC0 /* InfoPlist.strings in Resources */,
+				54B989AF19085FF000A67261 /* button-stop.png in Resources */,
 				54B989A11905C06700A67261 /* backward-7@2x.png in Resources */,
+				54B989C01909835500A67261 /* button-pause_new@2x.png in Resources */,
+				54B989B81908633800A67261 /* button-stop_new@2x.png in Resources */,
 				54DED4AE18E4A31C005FACC0 /* Main.storyboard in Resources */,
+				54B989B11908623800A67261 /* button-record@2x.png in Resources */,
+				54B989B31908627500A67261 /* button-record_new@2x.png in Resources */,
 				54F4D61B18F73C14009BAC58 /* folder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -404,6 +453,7 @@
 				54B9899D1905B46100A67261 /* FLYUtility.m in Sources */,
 				54F4D5FD18F7325B009BAC58 /* FLYConnectViewController.m in Sources */,
 				54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */,
+				54B989BC190978A400A67261 /* FLYSaveCaseViewController.m in Sources */,
 				54F4D5F618F5E701009BAC58 /* FLYConnectionManager.m in Sources */,
 				54145F1F19028D66008F6723 /* FLYCase.m in Sources */,
 				54DED4AB18E4A31C005FACC0 /* FLYAppDelegate.m in Sources */,

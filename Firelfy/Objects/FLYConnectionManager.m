@@ -28,9 +28,9 @@
 
 - (void) setupNotifications {
 
-    bleShield = [[BLE alloc] init];
-    [bleShield controlSetup];
-    bleShield.delegate = self;
+    self.bleShield = [[BLE alloc] init];
+    [self.bleShield controlSetup];
+    self.bleShield.delegate = self;
 
     
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -55,7 +55,7 @@
                                                  name:@"removeAllDevices"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(writeStart)
+                                             selector:@selector(writeStart:)
                                                  name:@"start"
                                                object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self
@@ -89,30 +89,30 @@
     NSLog(@"%d state for CBCentralManager", [testBluetooth state]);
     
     // Get the Periperal List
-    CBPeripheral *peripheral = bleShield.activePeripheral;
-    NSInteger i = bleShield.activePeripheral.state;
+    CBPeripheral *peripheral = self.bleShield.activePeripheral;
+    NSInteger i = self.bleShield.activePeripheral.state;
     
     if ((i == 0) && (peripheral == nil)) {
-        [bleShield findBLEPeripherals:3];
+        [self.bleShield findBLEPeripherals:3];
     }
 }
 
 -(void)connectToDevice:(NSNotification*)notif {
     NSInteger row = [((NSIndexPath*)[[notif userInfo] objectForKey:@"deviceID"]) row];
     periph = [self.listOfPeripherals objectAtIndex:row];
-    [bleShield connectPeripheral:periph];
+    [self.bleShield connectPeripheral:periph];
     
 }
 -(void)disconnectFromDevice:(NSNotification*)notif {
     NSInteger row = [((NSIndexPath*)[[notif userInfo] objectForKey:@"deviceID"]) row];
     periph = [self.listOfPeripherals objectAtIndex:row];
-    [[bleShield CM] cancelPeripheralConnection:periph];
+    [[self.bleShield CM] cancelPeripheralConnection:periph];
     
 }
 -(void)removeAllDevices:(NSNotification*)notif {
     NSArray * devices = [[notif userInfo] objectForKey:@"devices"];
     for( CBPeripheral * p in devices) {
-        [[bleShield CM] cancelPeripheralConnection:p];
+        [[self.bleShield CM] cancelPeripheralConnection:p];
     }
 }
 
@@ -121,34 +121,37 @@
 }
 
 #pragma mark - RedBear Writing Methods
--(void)writeStart {
+-(void)writeStart:(NSNotification*)notif {
+    // Inform the sample rate.
+    [self writeSample:notif];
+    
     UInt8 buf[3] = {0x01, 0x00, 0x00};
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [bleShield write:data];
+    [self.bleShield write:data];
 }
 
 -(void)writeStop {
     UInt8 buf[3] = {0x02, 0x00, 0x00};
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [bleShield write:data];
+    [self.bleShield write:data];
 }
 
 -(void)writeReset {
     UInt8 buf[3] = {0x03, 0x00, 0x00};
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [bleShield write:data];
+    [self.bleShield write:data];
 }
 -(void)writeSample:(NSNotification*) notif {
-    NSInteger val = ((NSString*)[[notif userInfo] objectForKey:@"values"]).integerValue;
+    NSInteger val = ((NSString*)[[notif userInfo] objectForKey:@"sampleRate"]).integerValue;
     UInt8 buf[3] = {0x04, 0x01, 0x00};
     buf[1] = val;
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [bleShield write:data];
+    [self.bleShield write:data];
 }
 -(void)writeSensor {
     UInt8 buf[3] = {0x05, 0x00, 0x00};
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
-    [bleShield write:data];
+    [self.bleShield write:data];
 }
 
 #pragma mark - RedBear BLE Module Methods
@@ -156,7 +159,7 @@
     
 }
 -(void)bleDidFindDevice {
-    self.listOfPeripherals = bleShield.peripherals;
+    self.listOfPeripherals = self.bleShield.peripherals;
     [[NSNotificationCenter defaultCenter] postNotificationName:@"devicesFound" object:self userInfo:@{@"devices": self.listOfPeripherals}];
 }
 
@@ -168,10 +171,10 @@
 -(void)bleDidConnect {
     NSLog(@"bleDidConnect Fired");
     
-    [bleShield getAllServicesFromPeripheral:bleShield.activePeripheral];
-    [bleShield getAllCharacteristicsFromPeripheral:bleShield.activePeripheral];
+    [self.bleShield getAllServicesFromPeripheral:self.bleShield.activePeripheral];
+    [self.bleShield getAllCharacteristicsFromPeripheral:self.bleShield.activePeripheral];
     
-    NSArray * services = bleShield.activePeripheral.services;
+    NSArray * services = self.bleShield.activePeripheral.services;
     NSLog(@"These are services: %@", services);
     
     // Get the number and name of sensors

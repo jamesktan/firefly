@@ -28,8 +28,6 @@
 }
 - (void)viewDidLoad
 {
-    [[FLYUtility sharedInstance] setButtonRounded:self.scanButton];
-    [[FLYUtility sharedInstance] setButtonRounded:self.continueButton];
     connectedDevices = 0;
     
     self.deviceTable.delegate = self;
@@ -69,7 +67,6 @@
     if (connectedDevices > 0) {
         [[[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"If you go back now, you will disconnect from all your bluetooth devices." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Go Ahead", nil] show];
     } else {
-        [self disconnectFromAllDevices];
         [self.navigationController popViewControllerAnimated:YES];
     }
 }
@@ -81,7 +78,9 @@
 }
 - (IBAction)goChart:(id)sender {
     if (connectedDevices > 0) {
-        [self performSegueWithIdentifier:@"push_monitor" sender:self];
+        if([((FLYConnectionManager*)[FLYConnectionManager sharedInstance]).bleShield isConnected]) {
+            [self performSegueWithIdentifier:@"push_monitor" sender:self];    
+        }
     } else {
         [[[UIAlertView alloc] initWithTitle:@"Sorry!" message:@"You cannot continue until you connect at least 1 device." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
     }
@@ -115,7 +114,9 @@
          cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell * cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
+    cell.backgroundColor = [UIColor clearColor];
     cell.textLabel.text = ((CBPeripheral*)[devices objectAtIndex:indexPath.row]).name;
+    cell.textLabel.textColor = [UIColor whiteColor];
     return cell;
 }
 
@@ -124,6 +125,7 @@
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     
     UITableViewCell * cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.textLabel.font = self.scanButton.titleLabel.font;
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
 
     if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
@@ -139,7 +141,9 @@
         connectedDevices += 1;
         
         [[NSNotificationCenter defaultCenter] postNotificationName:@"connectToDevice" object:self userInfo: @{@"devicePosition": indexPath}];
+        
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [cell setTintColor:[UIColor whiteColor]];
     }
     
 }
@@ -153,8 +157,12 @@
     }
 }
 
--(UIStatusBarStyle)preferredStatusBarStyle{
-    return UIStatusBarStyleLightContent;
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    [MBProgressHUD hideHUDForView:self.view animated:YES];
 }
 
 @end

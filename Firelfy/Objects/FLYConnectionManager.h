@@ -12,12 +12,11 @@
 #import "FLYDeviceManager.h"
 
 @interface FLYConnectionManager : NSObject  <BLEDelegate> {
-    BLE * bleShield;
     CBPeripheral * periph;
     FLYDeviceManager *DEVICE_MANAGER;
 }
 @property(strong, nonatomic) NSArray * listOfPeripherals;
-
+@property(strong,nonatomic) BLE * bleShield;
 + (id)          sharedInstance;
 - (void)        setupNotifications;
 

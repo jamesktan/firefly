@@ -108,5 +108,8 @@
     [self saveDevice:device];
     
 }
+- (void)storeFilePath:(NSString *)path {
+    self.filepath = path;
+}
 
 @end
