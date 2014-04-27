@@ -144,16 +144,34 @@
         
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [cell setTintColor:[UIColor whiteColor]];
+        
+        [self showAlertForControl];
+        
     }
     
 }
-
+-(void)showAlertForControl {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Choose Control or Test" message:@"Identify this device as the Control or the Test." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Control", @"Test", nil];
+    alert.tag = 1;
+    [alert show];
+}
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        // Disconnect Prompt - Go ahead and disconnect devices.
-        [self disconnectFromAllDevices];
-        [self.navigationController popViewControllerAnimated:YES];
+    if (alertView.tag == 1) {
+        if (buttonIndex == 1) {
+            NSLog(@"Control Selected");
+            
+        }
+        if (buttonIndex == 2) {
+            NSLog(@"Test Selected");
+        }
+        return;
+    } else {
+        if (buttonIndex == 1) {
+            // Disconnect Prompt - Go ahead and disconnect devices.
+            [self disconnectFromAllDevices];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
 }
 
