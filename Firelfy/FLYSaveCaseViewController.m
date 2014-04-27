@@ -23,8 +23,9 @@
     return self;
 }
 
--(void)viewDidAppear:(BOOL)animated {
+-(void)viewWillAppear:(BOOL)animated {
     
+    // Save the Data
     [tempFilePaths removeAllObjects];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
@@ -36,6 +37,27 @@
         [((FLYDevice*)[DEVICE_MANAGER.deviceStore objectAtIndex:a]).dataStores writeToFile:filePath atomically:YES]; //Write the file
         [tempFilePaths addObject:filePath];
     }
+    
+    // Size the data
+    NSInteger fileSizeTotalBytes = 0;
+    for (int a = 0; a < [tempFilePaths count]; a++) {
+        NSDictionary *fileAttributes = [[NSFileManager defaultManager] attributesOfItemAtPath:[tempFilePaths objectAtIndex:a]   error:nil];
+        fileSizeTotalBytes += [fileAttributes fileSize];
+    }
+
+    [self.filesizeLabel setText:[NSByteCountFormatter stringFromByteCount:fileSizeTotalBytes countStyle:NSByteCountFormatterCountStyleFile]];
+    
+    // Fetch the Duration
+    [self.durationLabel setText: [NSString stringWithFormat:@"%@ sec", DEVICE_MANAGER.duration.stringValue]];
+    
+    // Fetch the Device Count
+    [self.deviceCountLabel setText:[NSString stringWithFormat:@"%d",[DEVICE_MANAGER.deviceStore count]]];
+    
+    // Fetch the Sensor Count
+    [self.sensorCountLabel setText:[NSString stringWithFormat:@"%d", [DEVICE_MANAGER getSensorCount]]];
+    
+    // Fetch the Sample Rate
+    [self.sampleLabel setText:[NSString stringWithFormat:@"%.1f Hz",DEVICE_MANAGER.sample.floatValue]];
 }
 
 - (void)viewDidLoad
@@ -90,12 +112,15 @@
         runName = self.nameTextField.text;
     }
     
+    // Create the Body Text:
+    NSString *body = [NSString stringWithFormat:@"Hi!\n\n This is Firefly, delivering data! Attached is the raw file.\n\n Thanks!\n firefly \n\n filename: %@ \n duration %@ \n filesize %@ \n sensorCount %@ \n deviceCount %@ \n sampleRate %@ \n", self.nameLabel.text, self.durationLabel.text, self.filesizeLabel.text, self.sensorCountLabel.text, self.deviceCountLabel.text, self.sampleLabel.text];
+    
     MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
     
     [controller setToRecipients:@[recipient]];
     [controller setSubject:[NSString stringWithFormat:@"Firefly Run: %@", runName]];
-    [controller setMessageBody:@"Attached is the data you requested!" isHTML:NO];
+    [controller setMessageBody:body isHTML:NO];
     
     for (int a = 0; a < [tempFilePaths count]; a++) {
         NSData *noteData = [NSData dataWithContentsOfFile:[tempFilePaths objectAtIndex:a ]];

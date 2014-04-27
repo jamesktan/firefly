@@ -14,10 +14,15 @@
 
 @property (strong, nonatomic) NSMutableArray *deviceStore;
 @property (strong, nonatomic) NSString *filepath;
+@property (strong, nonatomic) NSNumber *duration;
+@property (strong, nonatomic) NSNumber *sample;
 
 - (BOOL) isInDeviceStore:(NSInteger)deviceID;
 - (void) createDevice:(NSInteger)deviceID sensorCount:(NSInteger)count;
 - (void) storeData: (NSDate*)date device: (NSInteger)deviceID data: (unsigned char *)data length:(NSInteger)length;
 - (void) storeFilePath:(NSString*)path;
+- (void) storeDuration:(NSInteger)sec;
+-(void)storeSampleRate:(NSInteger)sampleRate;
+- (NSInteger)getSensorCount;
 - (void) resetDevices;
 @end

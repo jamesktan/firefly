@@ -164,6 +164,8 @@
     if (!wasStarted) {
         [[[UIAlertView alloc] initWithTitle:@"Unable to Save" message:@"No data was collected! Please record a run before saving." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
     } else {
+        [DEVICE_MANAGER storeSampleRate:self.statusField.text.integerValue];
+        [DEVICE_MANAGER storeDuration:self.durationLabel.text.integerValue];
         [self performSegueWithIdentifier:@"push_save" sender:self];
     }
 }
@@ -174,11 +176,16 @@
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"start" object:self userInfo:@{@"sampleRate":self.statusField.text}];
     [self.statusLabel setText:@"recording"];
+    
+    [self.statusField setUserInteractionEnabled:FALSE];
 }
 
 - (IBAction)stopChart:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"stop" object:self userInfo:nil];
     [self.statusLabel setText:@"paused"];
+    
+    [self.statusField setUserInteractionEnabled:YES];
+
 }
 
 - (IBAction)toggleChartStopStart:(UIButton *)sender {

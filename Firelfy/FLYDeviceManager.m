@@ -114,4 +114,20 @@
 - (void) resetDevices {
     
 }
+-(void)storeDuration:(NSInteger)sec {
+    self.duration = [NSNumber numberWithInteger:sec];
+}
+-(void)storeSampleRate:(NSInteger)sampleRate {
+    float sampleRateSec = (float)sampleRate/1000.0f;
+    float frequency = 1.0f/sampleRateSec;
+    self.sample = [NSNumber numberWithFloat:frequency];
+    
+}
+-(NSInteger)getSensorCount {
+    NSInteger finalSensorCount = 0;
+    for (FLYDevice * device in self.deviceStore ) {
+        finalSensorCount += ([device.dataStores count] - 1);
+    }
+    return finalSensorCount;
+}
 @end
