@@ -111,5 +111,7 @@
 - (void)storeFilePath:(NSString *)path {
     self.filepath = path;
 }
-
+- (void) resetDevices {
+    
+}
 @end

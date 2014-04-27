@@ -66,6 +66,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     
 
+    wasStarted = FALSE;
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -160,21 +161,16 @@
         [self toggleChartStopStart:self.startButton];
     }
     
-    // Save the Chart to Local
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"test.plist"]; //Add the file name
-    [((FLYDevice*)[DEVICE_MANAGER.deviceStore objectAtIndex:0]).dataStores writeToFile:filePath atomically:YES]; //Write the file
-
-    [DEVICE_MANAGER storeFilePath:filePath];
-    
-    [self performSegueWithIdentifier:@"push_save" sender:self];
-
-    
+    if (!wasStarted) {
+        [[[UIAlertView alloc] initWithTitle:@"Unable to Save" message:@"No data was collected! Please record a run before saving." delegate:self cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+    } else {
+        [self performSegueWithIdentifier:@"push_save" sender:self];
+    }
 }
 
 - (IBAction)startChart:(id)sender {
     // delay is in ms, 1000ms per s
+    wasStarted = YES;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"start" object:self userInfo:@{@"sampleRate":self.statusField.text}];
     [self.statusLabel setText:@"recording"];

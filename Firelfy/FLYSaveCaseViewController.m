@@ -23,11 +23,26 @@
     return self;
 }
 
+-(void)viewDidAppear:(BOOL)animated {
+    
+    [tempFilePaths removeAllObjects];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    
+    NSInteger devicesToSave = [DEVICE_MANAGER.deviceStore count];
+    for (int a = 0; a < devicesToSave; a++) {
+        NSString *filePath = [documentsPath stringByAppendingPathComponent:[NSString stringWithFormat:@"testRun_%d.plist", a]]; //Add the file name
+        [((FLYDevice*)[DEVICE_MANAGER.deviceStore objectAtIndex:a]).dataStores writeToFile:filePath atomically:YES]; //Write the file
+        [tempFilePaths addObject:filePath];
+    }
+}
+
 - (void)viewDidLoad
 {
     DEVICE_MANAGER = [FLYDeviceManager sharedInstance];
-    
     [((FLYUtility*)[FLYUtility sharedInstance]) setButtonRounded:self.sendDataButton];
+    tempFilePaths = [[NSMutableArray alloc] init];
     [super viewDidLoad];
     // Do any additional setup after loading the view.
 }
@@ -54,30 +69,75 @@
 }
 
 - (IBAction)goFinish:(id)sender {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self.nameTextField.text isEqualToString:@""]) {
+        [[[UIAlertView alloc] initWithTitle:@"Save or Skip?" message:@"No run was given, would you like to save or skip? If you skip you will lose all data."  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Skip",nil] show];
+    } else {
+        [self saveFile];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (IBAction)sendData:(id)sender {
+    
+    // Check the Inputs into the Modal View
+    NSString * recipient = @"jamesktan@gmail.com";
+    if (![self.emailTextfield.text isEqualToString:@""]) {
+        recipient = self.emailTextfield.text;
+    }
+    
+    NSString * runName = @"testRun";
+    if (![self.nameTextField.text isEqualToString:@""]) {
+        runName = self.nameTextField.text;
+    }
+    
     MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
     controller.mailComposeDelegate = self;
     
-    [controller setToRecipients:@[@"jamesktan@gmail.com"]];
-    [controller setSubject:[NSString stringWithFormat:@"Firefly Run: %@", self.nameTextField.text]];
+    [controller setToRecipients:@[recipient]];
+    [controller setSubject:[NSString stringWithFormat:@"Firefly Run: %@", runName]];
     [controller setMessageBody:@"Attached is the data you requested!" isHTML:NO];
     
-    
-    NSData *noteData = [NSData dataWithContentsOfFile:DEVICE_MANAGER.filepath];
-    [controller addAttachmentData:noteData mimeType:@"text/plain" fileName:@"example.plist"];
-
+    for (int a = 0; a < [tempFilePaths count]; a++) {
+        NSData *noteData = [NSData dataWithContentsOfFile:[tempFilePaths objectAtIndex:a ]];
+        [controller addAttachmentData:noteData mimeType:@"text/plain" fileName:[NSString stringWithFormat:@"%@_%d.plist", runName, a]];
+    }
     
     [self presentViewController:controller animated:YES completion:nil];
 
 }
 
+- (IBAction)didEndOnExit:(id)sender {
+    [self.emailTextfield resignFirstResponder];
+    [self.nameTextField resignFirstResponder];
+}
+
+- (IBAction)runNameChanged:(id)sender {
+    NSString *s = [NSString stringWithFormat:@"%@.plist", self.nameTextField.text];
+    [self.nameLabel setText:s];
+}
+
+-(void)saveFile {
+    
+    NSFileManager * fm = [[NSFileManager alloc] init];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    
+    for (int a = 0; a < [tempFilePaths count]; a++) {
+        NSString *fileName = [NSString stringWithFormat:@"%@_%d.plist", self.nameTextField.text, a ];
+        NSString * filePathFull = [documentsPath stringByAppendingPathComponent:fileName];
+        [fm moveItemAtPath:[tempFilePaths objectAtIndex:a ] toPath:filePathFull error:nil];
+        [fm removeItemAtPath:[tempFilePaths objectAtIndex:a ] error:nil];
+
+    }
+
+
+}
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.emailTextfield resignFirstResponder];
     [self.nameTextField resignFirstResponder];
 }
+
 - (BOOL)prefersStatusBarHidden {
     return YES;
 }
@@ -92,5 +152,14 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == [alertView cancelButtonIndex]) {
+        [alertView dismissWithClickedButtonIndex:0 animated:YES];
+    } else {
+        [DEVICE_MANAGER resetDevices];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
 
 @end

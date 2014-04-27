@@ -15,6 +15,7 @@
     int deviceCount;
     NSMutableArray *colorArray;
     FLYDeviceManager * DEVICE_MANAGER;
+    BOOL wasStarted;
 }
 
 // Nav Buttons
