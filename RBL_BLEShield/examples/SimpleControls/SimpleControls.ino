@@ -78,7 +78,7 @@ void loop()
       if (data1 == 0x10) {
         sample_rate = 500;
       } else {
-        sample_rate = data1 * 1000;
+        sample_rate = int(data1) * 1000;
       }
       
       // Success Response
