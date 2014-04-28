@@ -41,6 +41,11 @@
                                              selector:@selector(connectionChangeFinished)
                                                  name:@"connectionFinished"
                                                object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(showAlertForControl:)
+                                                 name:@"finishedCreatingDevice"
+                                               object:nil];
+    
 
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -145,25 +150,28 @@
         cell.accessoryType = UITableViewCellAccessoryCheckmark;
         [cell setTintColor:[UIColor whiteColor]];
         
-        [self showAlertForControl];
         
     }
     
 }
--(void)showAlertForControl {
-    UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Choose Control or Test" message:@"Identify this device as the Control or the Test." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Control", @"Test", nil];
+-(void)showAlertForControl:(NSNotification*)notif {
+    UIAlertView * alert = [[UIAlertView alloc] initWithTitle: [[[notif userInfo] objectForKey:@"deviceID"] stringValue]
+ message:@"Identify this device as the Control or the Test." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Control", @"Test", nil];
     alert.tag = 1;
     [alert show];
 }
 #pragma mark - UIAlertViewDelegate
 -(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag == 1) {
+        // Select the Control or Test
         if (buttonIndex == 1) {
             NSLog(@"Control Selected");
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"saveControlTest" object:self userInfo:@{@"deviceID":alertView.title, @"value":@"control"}];
         }
         if (buttonIndex == 2) {
             NSLog(@"Test Selected");
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"saveControlTest" object:self userInfo:@{@"deviceID":alertView.title, @"value":@"test"}];
+
         }
         return;
     } else {

@@ -72,6 +72,12 @@
                                                  name:@"sample"
                                                object:nil];
     
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(saveControlTest:)
+                                                 name:@"saveControlTest"
+                                               object:nil];
+
     DEVICE_MANAGER = [FLYDeviceManager sharedInstance];
 
     
@@ -142,9 +148,16 @@
     [self.bleShield write:data];
 }
 -(void)writeSample:(NSNotification*) notif {
+    UInt8 buf[3] = {0x04, 0x00, 0x00};
     NSInteger val = ((NSString*)[[notif userInfo] objectForKey:@"sampleRate"]).integerValue;
-    UInt8 buf[3] = {0x04, 0x01, 0x00};
-    buf[1] = val;
+    
+    if (val == 500) { // 0.5 second
+        buf[1] = 0x10;
+    }
+    if (val >= 1000) {
+        UInt8 sample = val/1000;
+        buf[1] = sample;
+    }
     NSData *data = [[NSData alloc] initWithBytes:buf length:3];
     [self.bleShield write:data];
 }
@@ -196,16 +209,27 @@
         // Create the Devices
         if(![DEVICE_MANAGER isInDeviceStore:data[1]]) {
             [DEVICE_MANAGER createDevice:data[1] sensorCount:sensorCount];
+            UInt16 deviceID = data[1];
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"finishedCreatingDevice" object:self userInfo:@{@"deviceID":[NSNumber numberWithInt:deviceID]}];
+
         }
     }
     
     // if the message is about data
     if (data[0] == 0x06) {
+        
         if ([DEVICE_MANAGER isInDeviceStore:data[1]]) {
+            
             [DEVICE_MANAGER storeData: [NSDate date] device: data[1] data: data length:length];
             [[NSNotificationCenter defaultCenter] postNotificationName:@"updateGraph" object:self];
         }
     }
+    
+}
+-(void)saveControlTest:(NSNotification*)notif {
+    NSString * val = [[notif userInfo] objectForKey:@"value"];
+    NSString * deviceID = [[notif userInfo] objectForKey:@"deviceID"];
+    [DEVICE_MANAGER storeMetaControlTest:deviceID val:val];
     
 }
 

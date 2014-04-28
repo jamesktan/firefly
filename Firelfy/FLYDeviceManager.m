@@ -90,7 +90,11 @@
     FLYDevice * device = [self getDeviceByID:deviceID];
     NSMutableArray * dataStructure = device.dataStores;
     
-    [[dataStructure objectAtIndex:0] addObject:date];
+    NSDateFormatter *DateFormatter=[[NSDateFormatter alloc] init];
+    [DateFormatter setDateFormat:@"yyyy-MM-dd hh:mm:ss"];
+    NSString *dateString = [DateFormatter stringFromDate:date];
+
+    [[dataStructure objectAtIndex:0] addObject:dateString];
     
     
     NSInteger length_sensors = length - 2;
@@ -126,8 +130,13 @@
 -(NSInteger)getSensorCount {
     NSInteger finalSensorCount = 0;
     for (FLYDevice * device in self.deviceStore ) {
-        finalSensorCount += ([device.dataStores count] - 1);
+        finalSensorCount += ([device.dataStores count] - 2);
     }
     return finalSensorCount;
+}
+
+-(void)storeMetaControlTest: (NSString*)deviceID val:(NSString*)state {
+    FLYDevice * device = [self getDeviceByID:deviceID.integerValue];
+    [device.dataStores addObject:state];
 }
 @end

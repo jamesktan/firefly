@@ -25,4 +25,5 @@
 -(void)storeSampleRate:(NSInteger)sampleRate;
 - (NSInteger)getSensorCount;
 - (void) resetDevices;
+-(void)storeMetaControlTest: (NSString*)deviceID val:(NSString*)state;
 @end
