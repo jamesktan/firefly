@@ -144,7 +144,7 @@ void loop()
   }
   
 
-  ble_do_events();  
+//  ble_do_events();  
  
 }
 
