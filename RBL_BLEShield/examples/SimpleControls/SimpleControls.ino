@@ -37,7 +37,7 @@ void setup()
   
   // Init. and start BLE library.
   BLEMini_begin(57600);
-x
+
   // Enable serial debug
   Serial.begin(57600);
   
