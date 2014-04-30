@@ -13,7 +13,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 //"services.h/spi.h/boards.h" is needed in every new project
 #include <SPI.h>
 #include <boards.h>
-#include <ble_shield.h>
+#include <ble_mini.h>
 #include <services.h>
 #include <Servo.h> 
  
@@ -36,8 +36,8 @@ void setup()
   //ble_set_pins(3, 2);
   
   // Init. and start BLE library.
-  ble_begin();
-  Serial.println(ANALOG_IN_PIN);
+  BLEMini_begin(57600);
+x
   // Enable serial debug
   Serial.begin(57600);
   
@@ -54,188 +54,104 @@ void setup()
 void loop()
 { 
 
-  if(ble_available()) {
-    byte data0 = ble_read();
-    byte data1 = ble_read();
-    byte data2 = ble_read();
+  if(BLEMini_available()) { // jtan: does this need to be ==3?
+    byte data0 = BLEMini_read();
+    byte data1 = BLEMini_read();
+    byte data2 = BLEMini_read();
     
     if (data0 == 0x01) {
-      // Start
+      Serial.write("Start transmission\n");
       start_transmitting = true;
-      ble_write(0x01);
-      ble_write(1);
-      ble_write(0x00);
+      BLEMini_write(0x01);
+      BLEMini_write(1);
+      BLEMini_write(0x00);
     }
     if (data0 == 0x02) {
-      // Stop
+      Serial.write("Stop transmission\n");
       start_transmitting = false;
-      ble_write(0x02);
-      ble_write(1);
-      ble_write(0x00);
+      BLEMini_write(0x02);
+      BLEMini_write(1);
+      BLEMini_write(0x00);
     }
     if (data0 == 0x04) {
-      // Sample Change
+      Serial.write("Set sampling rate\n");
       if (data1 == 0x10) {
         sample_rate = 500;
       } else {
         sample_rate = int(data1) * 1000;
       }
       
-      // Success Response
-      ble_write(0x04);
-      ble_write(1);
-      ble_write(0x00);
-      Serial.write("HI: ");
-      Serial.write(sample_rate);
+      Serial.write("Set Success!\n");
+      BLEMini_write(0x04);
+      BLEMini_write(1);
+      BLEMini_write(0x00);
     }
     if (data0 == 0x05) {
-      // Report # of Sensors
-      ble_write(0x05);
-      ble_write(device);
-      ble_write(5);
-      ble_write(0x00);
+      Serial.write("Reporting Sensors\n");
+      BLEMini_write(0x05);
+      BLEMini_write(device);
+      BLEMini_write(1);
+      BLEMini_write(0x00);
     }
     
   }
   
   if (start_transmitting) {
-   
-    Serial.write("MOO\n");
-    // Report Sensor Values
-        
-    long sensorID1 = 1;
-    long r1 = random(30);
+    Serial.write("Transmit...\n");
     
-    long sensorID2 = 2;
-    long r2 = random(30);
-    
-    long sensorID3 = 3;
-    long r3 = random(30);
-    
-    long sensorID4 = 4;
-    long r4 = random(30);
-    
-    long sensorID5 = 5;
-    long r5 = random(30);
+//    long sensorID1 = 1;
+//    long r1 = random(30);
+//    
+//    long sensorID2 = 2;
+//    long r2 = random(30);
+//    
+//    long sensorID3 = 3;
+//    long r3 = random(30);
+//    
+//    long sensorID4 = 4;
+//    long r4 = random(30);
+//    
+//    long sensorID5 = 5;
+//    long r5 = random(30);
     
     
-    ble_write(0x06);
-    ble_write(device);
+    BLEMini_write(0x06); //This identifies how to handle this package
+    BLEMini_write(device);
 
-    ble_write(sensorID1);
-    ble_write(r1);
+    uint16_t value = temp_calib(analogRead(ANALOG_IN_PIN))*10; 
+    BLEMini_write(value >> 8); // jtan: Which of these is actually needed?
+    BLEMini_write(value); // Sizing issue? jtan: not sure we actually need this one here...
     
-    ble_write(sensorID2);
-    ble_write(r2);
+//    ble_write(sensorID1);
+//    ble_write(r1);
+//    
+//    ble_write(sensorID2);
+//    ble_write(r2);
+//    
+//    ble_write(sensorID3);
+//    ble_write(r3);
+//    
+//    ble_write(sensorID4);
+//    ble_write(r4);
+//    
+//    ble_write(sensorID5);
+//    ble_write(r5);
+//    
+    BLEMini_write(0x00);
     
-    ble_write(sensorID3);
-    ble_write(r3);
-    
-    ble_write(sensorID4);
-    ble_write(r4);
-    
-    ble_write(sensorID5);
-    ble_write(r5);
-    
-    ble_write(0x00);
-    Serial.write("Hello1");
-    Serial.write(sample_rate);
-    Serial.write("Hello2");
     delay(sample_rate);
 
   }
   
-//  while(ble_available())
-//  {
-//    // read out command and data
-//    byte data0 = ble_read();
-//    byte data1 = ble_read();
-//    byte data2 = ble_read();
-//    Serial.println(ble_available());
-////    Serial.println(data0);
-////    Serial.println(data1);
-////    Serial.println(data2);
-//    
-//    Serial.println('ble available \n');
-//    if (data0 == 0x01)  // Command is to control digital out pin
-//    {
-//      if (data1 == 0x01)
-//        digitalWrite(DIGITAL_OUT_PIN, HIGH);
-//      else
-//        digitalWrite(DIGITAL_OUT_PIN, LOW);
-//    }
-//    else if (data0 == 0xA0) // Command is to enable analog in reading
-//    {
-//      Serial.println('analog');
-//      if (data1 == 0x01)
-//        analog_enabled = true;
-//      else
-//        analog_enabled = false;
-//    }
-//    else if (data0 == 0x02) // Command is to control PWM pin
-//    {
-//      analogWrite(PWM_PIN, data1);
-//    }
-//    else if (data0 == 0x03)  // Command is to control Servo pin
-//    {
-//      myservo.write(data1);
-//    }
-//    else if (data0 == 0x04)
-//    {
-//      analog_enabled = false;
-//      myservo.write(0);
-//      analogWrite(PWM_PIN, 0);
-//      digitalWrite(DIGITAL_OUT_PIN, LOW);
-//    }
-//  }
-  
-  // Do this even if not available.
-  
-//  uint16_t value = analogRead(ANALOG_IN_PIN); 
-//  ble_write(0x0B);
-//  ble_write(value >> 8);
-//  ble_write(13);
-//      
-//  if (analog_enabled)  // if analog reading enabled
-//  {
-//    // Read and send out
-//    uint16_t value = analogRead(ANALOG_IN_PIN); 
-//    ble_write(0x0B);
-//    ble_write(value >> 8);
-//    ble_write(value);
-//  }
-//  
-//  // If digital in changes, report the state
-//  if (digitalRead(DIGITAL_IN_PIN) != old_state)
-//  {
-//    Serial.println("BLE DIGITAL RECEIVED");
-//    old_state = digitalRead(DIGITAL_IN_PIN);
-//    
-//    if (digitalRead(DIGITAL_IN_PIN) == HIGH)
-//    {
-//      ble_write(0x0A);
-//      ble_write(0x01);
-//      ble_write(0x00);    
-//    }
-//    else
-//    {
-//      ble_write(0x0A);
-//      ble_write(0x00);
-//      ble_write(0x00);
-//    }
-//  }
-//  
-//  if (!ble_connected())
-//  {
-//    
-//    analog_enabled = false;
-//    digitalWrite(DIGITAL_OUT_PIN, LOW);
-//  }
-  
-  // Allow BLE Shield to send/receive data
+
   ble_do_events();  
  
 }
 
 
-
+float temp_calib(float temp_raw){
+  //float VCC = analogRead(power_read);
+  //Serial.println(VCC);  
+  float temp_f = (temp_raw*0.1743)-10.027+constant;
+  return temp_f;
+}
