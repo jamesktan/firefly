@@ -26,4 +26,8 @@
 - (NSInteger)getSensorCount;
 - (void) resetDevices;
 -(void)storeMetaControlTest: (NSString*)deviceID val:(NSString*)state;
+
+- (void) loadStoredData:(NSString*)filename;
+- (NSString*) getFileCreationDate:(NSString*)filename;
+
 @end

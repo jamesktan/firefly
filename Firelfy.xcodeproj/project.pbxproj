@@ -11,6 +11,7 @@
 		54145F1F19028D66008F6723 /* FLYCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F1E19028D66008F6723 /* FLYCase.m */; };
 		54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F21190297B6008F6723 /* FLYDeviceManager.m */; };
 		54145F2519029830008F6723 /* FLYDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = 54145F2419029830008F6723 /* FLYDevice.m */; };
+		542CC3B81913B0A7003B8756 /* FLYLoadViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 542CC3B71913B0A7003B8756 /* FLYLoadViewController.m */; };
 		54B9899D1905B46100A67261 /* FLYUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B9899C1905B46100A67261 /* FLYUtility.m */; };
 		54B9899F1905B95700A67261 /* bee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B9899E1905B95700A67261 /* bee@2x.png */; };
 		54B989A11905C06700A67261 /* backward-7@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 54B989A01905C06700A67261 /* backward-7@2x.png */; };
@@ -80,6 +81,8 @@
 		54145F21190297B6008F6723 /* FLYDeviceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDeviceManager.m; sourceTree = "<group>"; };
 		54145F2319029830008F6723 /* FLYDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYDevice.h; sourceTree = "<group>"; };
 		54145F2419029830008F6723 /* FLYDevice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYDevice.m; sourceTree = "<group>"; };
+		542CC3B61913B0A7003B8756 /* FLYLoadViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYLoadViewController.h; sourceTree = "<group>"; };
+		542CC3B71913B0A7003B8756 /* FLYLoadViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYLoadViewController.m; sourceTree = "<group>"; };
 		54B9899B1905B46100A67261 /* FLYUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLYUtility.h; sourceTree = "<group>"; };
 		54B9899C1905B46100A67261 /* FLYUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLYUtility.m; sourceTree = "<group>"; };
 		54B9899E1905B95700A67261 /* bee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bee@2x.png"; sourceTree = "<group>"; };
@@ -234,6 +237,8 @@
 				54F4D5FF18F73778009BAC58 /* FLYChartViewController.m */,
 				54B989BA190978A400A67261 /* FLYSaveCaseViewController.h */,
 				54B989BB190978A400A67261 /* FLYSaveCaseViewController.m */,
+				542CC3B61913B0A7003B8756 /* FLYLoadViewController.h */,
+				542CC3B71913B0A7003B8756 /* FLYLoadViewController.m */,
 				54F4D5FA18F73243009BAC58 /* Managers */,
 				54DED4B218E4A31C005FACC0 /* Images.xcassets */,
 				54DED4A118E4A31C005FACC0 /* Supporting Files */,
@@ -479,6 +484,7 @@
 				54145F22190297B6008F6723 /* FLYDeviceManager.m in Sources */,
 				54B989BC190978A400A67261 /* FLYSaveCaseViewController.m in Sources */,
 				54F4D5F618F5E701009BAC58 /* FLYConnectionManager.m in Sources */,
+				542CC3B81913B0A7003B8756 /* FLYLoadViewController.m in Sources */,
 				54145F1F19028D66008F6723 /* FLYCase.m in Sources */,
 				54DED4AB18E4A31C005FACC0 /* FLYAppDelegate.m in Sources */,
 				54F4D5F318F5E29B009BAC58 /* FLYSplashViewController.m in Sources */,

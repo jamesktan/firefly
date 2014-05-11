@@ -155,6 +155,10 @@
         [fm removeItemAtPath:[tempFilePaths objectAtIndex:a ] error:nil];
 
     }
+    
+    // Remove a Legacy Thing
+    [fm removeItemAtPath:[documentsPath stringByAppendingString:@"test.plist"] error:nil];
+    
 
 
 }

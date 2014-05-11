@@ -133,8 +133,7 @@
 }
 
 - (IBAction)openExistingCase:(id)sender {
-//    [self performSegueWithIdentifier:@"pushOpen" sender:self];
-    [[[UIAlertView alloc] initWithTitle:@"Not ready!" message:@"Sorry, this feature isn't ready yet! Check back soon!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    [self performSegueWithIdentifier:@"pushOpen" sender:self];
 
 }
 

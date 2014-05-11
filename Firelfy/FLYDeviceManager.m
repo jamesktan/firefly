@@ -83,6 +83,8 @@
     for (int a = 0 ; a < count; a ++) {
         [device.dataStores addObject: [[NSMutableArray alloc]init] ]; //DataPoints
     }
+    [device.dataStores addObject:[[NSMutableDictionary alloc] init]] ; // Dictionary
+    
     [self saveDevice:device];
 }
 - (void) storeData: (NSDate*)date device: (NSInteger)deviceID data: (unsigned char *)data length:(NSInteger)length {
@@ -120,11 +122,18 @@
 }
 -(void)storeDuration:(NSInteger)sec {
     self.duration = [NSNumber numberWithInteger:sec];
+    for (FLYDevice * device in self.deviceStore ) {
+        [[device.dataStores lastObject] setObject:[NSNumber numberWithInteger:sec] forKey:@"duration"];
+    }
 }
 -(void)storeSampleRate:(NSInteger)sampleRate {
     float sampleRateSec = (float)sampleRate/1000.0f;
     float frequency = 1.0f/sampleRateSec;
     self.sample = [NSNumber numberWithFloat:frequency];
+    for (FLYDevice * device in self.deviceStore ) {
+        [[device.dataStores lastObject] setObject:[NSNumber numberWithFloat:frequency] forKey:@"sampleRate"];
+    }
+
     
 }
 -(NSInteger)getSensorCount {
@@ -137,6 +146,30 @@
 
 -(void)storeMetaControlTest: (NSString*)deviceID val:(NSString*)state {
     FLYDevice * device = [self getDeviceByID:deviceID.integerValue];
-    [device.dataStores addObject:state];
+    [[device.dataStores lastObject] setObject:state forKey:@"controlOrTestState"];
+}
+
+- (void) loadStoredData:(NSString*)filename {
+    NSFileManager * fm = [[NSFileManager alloc] init];
+    
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:filename];
+    
+    
+}
+-(NSString*)getFileCreationDate:(NSString*)filename {
+    NSFileManager * fm = [[NSFileManager alloc] init];
+
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:filename];
+    NSDictionary *attributes = [fm attributesOfItemAtPath:filePath error:nil];
+    
+    NSString *dateString = [NSDateFormatter localizedStringFromDate:[attributes objectForKey:@"NSFileCreationDate"]                                                          dateStyle:NSDateFormatterShortStyle
+        timeStyle:NSDateFormatterShortStyle];
+
+    return dateString ;
+
 }
 @end
