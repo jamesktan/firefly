@@ -67,6 +67,7 @@
     
 
     wasStarted = FALSE;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated {
@@ -110,6 +111,23 @@
         
     }
     
+    if ([DEVICE_MANAGER getLoadState]) {
+        // Using Loaded Data
+        
+        wasStarted = TRUE;
+        
+        [self.startButton setEnabled:FALSE];
+        [self.statusField setEnabled:FALSE];
+        [self.statusLabel setText:@"Review"];
+        self.durationLabel.text = [NSString stringWithFormat:@"%@s",[DEVICE_MANAGER.duration stringValue]];
+        
+        int sampleRate = (1/DEVICE_MANAGER.sample.integerValue) * 1000;
+        
+        self.statusField.text = [NSString stringWithFormat:@"%d",sampleRate];
+
+    }
+
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -149,9 +167,6 @@
 #pragma mark IBAction Methods
 - (IBAction)goBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
-}
--(void)viewDidAppear:(BOOL)animated {
-
 }
 
 - (IBAction)goSave:(id)sender {

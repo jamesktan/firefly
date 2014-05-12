@@ -8,7 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "FLYDevice.h"
-@interface FLYDeviceManager : NSObject
+@interface FLYDeviceManager : NSObject {
+    BOOL loadState;
+}
 
 + (id) sharedInstance;
 
@@ -29,5 +31,7 @@
 
 - (void) loadStoredData:(NSArray*)fileList;
 - (NSString*) getFileCreationDate:(NSString*)filename;
+
+-(BOOL)getLoadState;
 
 @end

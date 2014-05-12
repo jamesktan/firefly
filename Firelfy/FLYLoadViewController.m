@@ -31,6 +31,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [[FLYUtility sharedInstance] setButtonRounded:self.deleteButton];
+    
     // Do any additional setup after loading the view.
     self.existingCaseTable.delegate = self;
     self.existingCaseTable.dataSource = self;
@@ -52,10 +55,16 @@
 
 -(BOOL)checkListForCompleteness:(NSMutableArray*)selected masterList:(NSArray*)masterList {
     NSString * prefix = [self getRunName:[selectedFiles firstObject]];
+    
+    int matching = 0;
     for (NSString * filename in masterList) {
-        if (![[self getRunName:filename] isEqualToString:prefix]) {
-            return FALSE;
+        if ([[self getRunName:filename] isEqualToString:prefix]) {
+            matching += 1;
         }
+    }
+    
+    if (matching != [selected count]) {
+        return FALSE;
     }
     return TRUE;
 }
@@ -95,11 +104,25 @@
         }
         if (![self checkListForCompleteness:selectedFiles masterList:self.fileList]) {
             proceed = FALSE;
-            [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Please select all the devices in this run before proceeding" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
         }
+        
         if (proceed) {
             [self performSegueWithIdentifier:@"push_monitor_existing" sender:self];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"Mismatch Detected!" message:@"Please only selected device run data of matching run names." delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles: nil] show];
+
         }
+    }
+}
+
+- (IBAction)deleteSelected:(id)sender {
+    
+    if (selectedFiles.count == 0) {
+        [[[UIAlertView alloc] initWithTitle:@"Error!" message:@"No items were selected to be deleted!" delegate:self cancelButtonTitle:@"Okay" otherButtonTitles:nil] show];
+    } else {
+        UIAlertView * alert = [[UIAlertView alloc] initWithTitle:@"Are you sure?" message:@"Are you sure you want to delete these items? This cannot be undone." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes!", nil];
+        alert.tag = 99;
+        [alert show];
     }
 }
 
@@ -120,6 +143,11 @@
 
     [cell.textLabel setText:[self.fileList objectAtIndex:indexPath.row]];
     [cell.detailTextLabel setText: [DEVICE_MANAGER getFileCreationDate: [self.fileList objectAtIndex:indexPath.row ]]];
+
+    if ([selectedFiles containsObject:cell.textLabel.text]) {
+        cell.accessoryType = UITableViewCellAccessoryCheckmark;
+        [cell setTintColor:[UIColor whiteColor]];
+    }
     
     [cell.textLabel setTextColor:[UIColor whiteColor]];
     [cell.detailTextLabel setTextColor:[UIColor whiteColor]];
@@ -150,6 +178,31 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"push_monitor_existing"]) {
         [DEVICE_MANAGER loadStoredData:selectedFiles];
+        
+    }
+}
+
+#pragma mark - UIAlertViewDelegate
+-(void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 99) {
+        if(buttonIndex == 1) {
+            
+            NSFileManager * fm = [[NSFileManager alloc] init];
+            
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
+            
+            for (NSString * filename in selectedFiles) {
+                NSString * filepath = [documentsPath stringByAppendingPathComponent:filename];
+                [fm removeItemAtPath:filepath error:nil];
+            }
+            
+            
+            [selectedFiles removeAllObjects];
+            [self viewWillAppear:YES];
+            [self.existingCaseTable reloadData];
+
+        }
     }
 }
 @end

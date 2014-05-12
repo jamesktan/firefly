@@ -92,7 +92,7 @@
 
 - (IBAction)goFinish:(id)sender {
     if ([self.nameTextField.text isEqualToString:@""]) {
-        [[[UIAlertView alloc] initWithTitle:@"Save or Skip?" message:@"No run was given, would you like to save or skip? If you skip you will lose all data."  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Skip",nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Save or Skip?" message:@"No Run Name was given, would you like to save or skip? If you skip you will lose your data."  delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles: @"Skip",nil] show];
     } else {
         [self saveFile];
         [self.navigationController popToRootViewControllerAnimated:YES];

@@ -154,7 +154,9 @@
 }
 
 - (void) loadStoredData:(NSArray*)fileList {
-
+    loadState = TRUE;
+    
+    self.deviceStore = [[NSMutableArray alloc] init];
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
@@ -168,11 +170,18 @@
         device.deviceID = [[device.dataStores lastObject] objectForKey:@"deviceID"];
         device.deviceCount = [[device.dataStores lastObject] objectForKey:@"sensorCount"];
         
-        [self.deviceStore addObject:device];
+        NSLog(@"%@ device", device);
+        [self saveDevice:device];
+        
+        // Set the Manager Properties
+        self.sample = [[device.dataStores lastObject] objectForKey:@"sampleRate"];
+        self.duration = [[device.dataStores lastObject] objectForKey:@"duration"];
     }
     
     
 }
+
+
 -(NSString*)getFileCreationDate:(NSString*)filename {
     NSFileManager * fm = [[NSFileManager alloc] init];
 
@@ -186,5 +195,8 @@
 
     return dateString ;
 
+}
+-(BOOL)getLoadState {
+    return loadState;
 }
 @end
