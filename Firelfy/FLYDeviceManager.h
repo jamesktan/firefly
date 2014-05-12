@@ -27,7 +27,7 @@
 - (void) resetDevices;
 -(void)storeMetaControlTest: (NSString*)deviceID val:(NSString*)state;
 
-- (void) loadStoredData:(NSString*)filename;
+- (void) loadStoredData:(NSArray*)fileList;
 - (NSString*) getFileCreationDate:(NSString*)filename;
 
 @end

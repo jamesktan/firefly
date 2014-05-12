@@ -83,7 +83,12 @@
     for (int a = 0 ; a < count; a ++) {
         [device.dataStores addObject: [[NSMutableArray alloc]init] ]; //DataPoints
     }
-    [device.dataStores addObject:[[NSMutableDictionary alloc] init]] ; // Dictionary
+    
+    // Create and Save the Dictionary Based Meta Data Store
+    NSMutableDictionary * metaDataStore = [[NSMutableDictionary alloc] init];
+    [metaDataStore setObject:device.deviceID  forKey:@"deviceID"];
+    [metaDataStore setObject:device.deviceCount forKey:@"sensorCount"];
+    [device.dataStores addObject:metaDataStore];
     
     [self saveDevice:device];
 }
@@ -134,7 +139,6 @@
         [[device.dataStores lastObject] setObject:[NSNumber numberWithFloat:frequency] forKey:@"sampleRate"];
     }
 
-    
 }
 -(NSInteger)getSensorCount {
     NSInteger finalSensorCount = 0;
@@ -149,12 +153,23 @@
     [[device.dataStores lastObject] setObject:state forKey:@"controlOrTestState"];
 }
 
-- (void) loadStoredData:(NSString*)filename {
-    NSFileManager * fm = [[NSFileManager alloc] init];
+- (void) loadStoredData:(NSArray*)fileList {
+
     
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *documentsPath = [paths objectAtIndex:0]; //Get the docs directory
-    NSString *filePath = [documentsPath stringByAppendingPathComponent:filename];
+
+    for (NSString *filename in fileList) {
+        NSString *filePath = [documentsPath stringByAppendingPathComponent:filename];
+        
+        // Create the Device and set the stores
+        FLYDevice * device = [[FLYDevice alloc] init];
+        device.dataStores = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+        device.deviceID = [[device.dataStores lastObject] objectForKey:@"deviceID"];
+        device.deviceCount = [[device.dataStores lastObject] objectForKey:@"sensorCount"];
+        
+        [self.deviceStore addObject:device];
+    }
     
     
 }

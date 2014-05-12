@@ -12,9 +12,11 @@
 @interface FLYLoadViewController : UIViewController <UITableViewDataSource, UITableViewDelegate> {
     FLYDeviceManager *DEVICE_MANAGER;
     NSInteger selectedIndex;
+    NSMutableArray * selectedFiles;
 }
 
 - (IBAction)goBack:(id)sender;
+- (IBAction)loadChart:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UITableView *existingCaseTable;
 @property (strong, nonatomic) NSArray * fileList;
