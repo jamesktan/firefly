@@ -1,3 +1,4 @@
+
 /*
 
 Copyright (c) 2012, 2013 RedBearLab
@@ -11,12 +12,13 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 */
 
 //"services.h/spi.h/boards.h" is needed in every new project
-#include <SPI.h>
-#include <boards.h>
-#include <ble_mini.h>
+
+#include <SPI.h> // bleMini
+#include <boards.h> // bleMini
 #include <services.h>
+#include <ble_mini.h>
 #include <Servo.h> 
- 
+
 #define DIGITAL_OUT_PIN    4
 #define DIGITAL_IN_PIN     5
 #define PWM_PIN            6
@@ -27,7 +29,9 @@ Servo myservo;
 
 static boolean start_transmitting = false;
 static long sample_rate = 1000;
-static long device = 12;
+static long device = 12; //bleMini
+
+int samplingInterval = 250;          // how often to run the main loop (in ms)
 
 void setup()
 {
@@ -37,12 +41,12 @@ void setup()
   
   // Init. and start BLE library.
   BLEMini_begin(57600);
-
-  // Enable serial debug
-  Serial.begin(57600);
   
   pinMode(DIGITAL_OUT_PIN, OUTPUT);
   pinMode(DIGITAL_IN_PIN, INPUT);
+
+  // Enable serial debug
+  Serial.begin(57600);
   
   // Default to internally pull high, change it if you need
   digitalWrite(DIGITAL_IN_PIN, HIGH);
@@ -53,8 +57,10 @@ void setup()
 
 void loop()
 { 
-
+  
+  Serial.write("this and that \n");
   if(BLEMini_available()) { // jtan: does this need to be ==3?
+    Serial.write("available!\n");
     byte data0 = BLEMini_read();
     byte data1 = BLEMini_read();
     byte data2 = BLEMini_read();
@@ -114,13 +120,13 @@ void loop()
 //    long sensorID5 = 5;
 //    long r5 = random(30);
     
-    
-    BLEMini_write(0x06); //This identifies how to handle this package
-    BLEMini_write(device);
-
-    uint16_t value = temp_calib(analogRead(ANALOG_IN_PIN))*10; 
-    BLEMini_write(value >> 8); // jtan: Which of these is actually needed?
-    BLEMini_write(value); // Sizing issue? jtan: not sure we actually need this one here...
+//    
+//    BLEMini_write(0x06); //This identifies how to handle this package
+//    BLEMini_write(device);
+//
+//    uint16_t value = temp_calib(analogRead(ANALOG_IN_PIN))*10; 
+//    BLEMini_write(value >> 8); // jtan: Which of these is actually needed?
+//    BLEMini_write(value); // Sizing issue? jtan: not sure we actually need this one here...
     
 //    ble_write(sensorID1);
 //    ble_write(r1);
@@ -149,9 +155,11 @@ void loop()
 }
 
 
-float temp_calib(float temp_raw){
-  //float VCC = analogRead(power_read);
-  //Serial.println(VCC);  
-  float temp_f = (temp_raw*0.1743)-10.027+constant;
-  return temp_f;
-}
+
+// Temperature stuff that we don't need yet.
+//float temp_calib(float temp_raw){
+//  //float VCC = analogRead(power_read);
+//  //Serial.println(VCC);  
+//  float temp_f = (temp_raw*0.1743)-10.027+10;
+//  return temp_f;
+//}
